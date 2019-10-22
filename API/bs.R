@@ -6,7 +6,11 @@ options(encoding='UTF-8')
 library(RMariaDB)
 library(DBI)
 library(openssl)
-con <- dbConnect(RMariaDB::MariaDB(), user = "root", db = "seb")
+library(httr)
+library(jsonlite)
+library(stringi)
+# con <- dbConnect(RMariaDB::MariaDB(), user = "root", db = "seb")
+con <- dbConnect(RMariaDB::MariaDB(), user = "root", password = "seb", db = "seb")
 
 #* Log some information about the incoming request
 #* @filter logger
@@ -34,9 +38,10 @@ function(driver_name = "", req){
   names(road) <- c("pithole","barrier")
   name <- driver_name
   id <- newest_id$id +1
-  ip = req$REMOTE_ADDR
+  ip <- req$REMOTE_ADDR
+  pc_id <- as.integer(stri_replace_all_fixed(ip, ".", "")) %% 2
   token <- paste0(md5(paste0(id, name)))
-  df <- cbind(id , name, token, car, road, ip)
+  df <- cbind(id , name, token, car, road, ip, pc_id)
   dbWriteTable(con, "game_info", df, append = TRUE)
   list(Message = "Success",
        token = token)
@@ -48,11 +53,12 @@ function(driver_name = "", req){
 function(token = ""){
   if (token %in% dbGetQuery(con, "select distinct token from game_info")$token) {
     game_info <- dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))
-    if (sum(game_info[4:9]) == 6) {
+    problems <- (4 - sum(game_info[4:7]) + sum(game_info[8:9]))
+    if (problems == 0) {
       text <- "Ready to reach max speed!"
     }
     else {
-      text <- paste0("Problems left: ", (6-sum(game_info[4:9])))
+      text <- paste0("Problems left: ", problems)
     }
   }
   else {
@@ -82,14 +88,14 @@ function(token = ""){
 #* @post /fixRoadProblem
 function(token = "", pithole = "", barrier = ""){
   if (token %in% dbGetQuery(con, "select distinct token from game_info")$token) {
-    if (pithole == 1) {
-      dbSendQuery(con, paste0("update game_info set pithole = 1 where token = '", token, "'"))
+    if (pithole == 0) {
+      dbSendQuery(con, paste0("update game_info set pithole = 0 where token = '", token, "'"))
     }
-    else if (barrier == 1) {
-      dbSendQuery(con, paste0("update game_info set barrier = 1 where token = '", token, "'"))
+    else if (barrier == 0) {
+      dbSendQuery(con, paste0("update game_info set barrier = 0 where token = '", token, "'"))
     }
     c(status = "success",
-         dbGetQuery(con, paste0("select pithole, barrier from game_info where token = '", token, "'")))
+      dbGetQuery(con, paste0("select pithole, barrier from game_info where token = '", token, "'")))
   }
   else {
     text <- "Please enter valid token"
@@ -132,10 +138,13 @@ function(token = "", fuel = "", battery = "", tires = "", turbo_charger = ""){
 #* @post /startDrive
 function(token = ""){
   if (token %in% dbGetQuery(con, "select distinct token from game_info")$token) {
+    game_info <- dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))
+    max_speed <- (2 + sum(game_info[4:7]) - sum(game_info[8:9]))/6
+    pc_id <- game_info$pc_id
+    speed_params <- list(pc_id = pc_id, speed = max_speed)
+    POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
     list(Message = paste0("Contratulations ", dbGetQuery(con, paste0("select name from game_info where token = '", token, "'"))$name),
-         max_speed = (sum(dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))[4:9])*100/6),
-         Event = "Čia kažkokį eventą galima padaryt, pvz papostinti i API/pakeisti faila/etc.",
-         visi_duomenys = dbGetQuery(con, paste0("select * from game_info where token = '", token, "'")))
+         max_speed = max_speed)
   }
   else {
     text <- "Please enter valid token"

@@ -1,0 +1,1 @@
+java -jar SebCarConfigurationServer.jar --server.port=9000
