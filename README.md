@@ -25,6 +25,11 @@ source("runAPI.R")
 
 R runs swagger on localhost: http://127.0.0.1:8000/__swagger__/
 
+## Test API endpoint
+```bash
+java -jar SebCarConfigurationServer.jar --server.port=9000
+```
+
 ## Hosting API locally (Linux)
 
 ```bash
