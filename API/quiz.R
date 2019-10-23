@@ -8,7 +8,10 @@ library(DBI)
 library(openssl)
 library(dplyr)
 library(magrittr)
-con <- dbConnect(RMariaDB::MariaDB(), user = "root", password = "seb", db = "seb")
+library(jsonlite)
+library(stringi)
+library(httr)
+con <- dbConnect(RMariaDB::MariaDB(), user = "seb", password = "seb", db = "seb")
 
 #* Log some information about the incoming request
 #* @filter logger
@@ -43,7 +46,8 @@ function(name = "", req){
   q3 <- questions$id[3]
   q4 <- questions$id[4]
   q5 <- questions$id[5]
-  df <- cbind.data.frame(id , name, token, q1, q2, q3, q4, q5 , ip)
+  pc_id <- as.integer(stri_replace_all_fixed(ip, ".", "")) %% 2
+  df <- cbind.data.frame(id , name, token, q1, q2, q3, q4, q5 , ip, pc_id)
   dbWriteTable(con, "game_quiz", df, append = TRUE)
   list(quiz = df, questions = questions)
   
@@ -63,7 +67,10 @@ function(token = "", a1 = "", a2 = "", a3 = "", a4 = "", a5 = ""){
   db <-dbGetQuery(con, paste0('SELECT * FROM seb.questions WHERE id IN (', paste(questions[4:8], collapse = ","), ')'))
   results <- cbind.data.frame(db, answer) %>%
     mutate(points = ifelse(correct_answer == answer, 1, 0))
-  list(db = results, speed = sum(results$points)/5)
+  pc_id <- questions$pc_id
+  max_speed <- (sum(results$points) * 0.6 / 5)
+  speed_params <- list(pc_id = pc_id, speed = max_speed)
+  POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
+  list(db = results, max_speed = max_speed)
   
 }
-
