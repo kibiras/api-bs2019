@@ -10,7 +10,7 @@ library(httr)
 library(jsonlite)
 library(stringi)
 # con <- dbConnect(RMariaDB::MariaDB(), user = "root", db = "seb")
-con <- dbConnect(RMariaDB::MariaDB(), user = "seb", password = "seb", db = "seb")
+con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
 
 #* Log some information about the incoming request
 #* @filter logger

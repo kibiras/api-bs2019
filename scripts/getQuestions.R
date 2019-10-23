@@ -3,10 +3,7 @@ library(tidyverse)
 library(textutils)
 library(DBI)
 library(RMariaDB)
-con <- dbConnect(RMariaDB::MariaDB(), 
-                 host = "lsp7490d.sebank.se",
-                 user = "root", 
-                 db = "seb")
+con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
 
 questions <- GET("https://opentdb.com/api.php?amount=32&category=18&type=boolean") %>%
   content(as="parsed") 

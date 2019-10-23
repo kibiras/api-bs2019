@@ -1,7 +1,7 @@
 library(RMariaDB)
 library(DBI)
-con <- dbConnect(RMariaDB::MariaDB(), user = "seb", password = "seb", db = "seb")
-# con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
+con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
+
 dbSendQuery(con, "drop table seb.game_info")
 dbSendQuery(con, "create table seb.game_info (
             id INT NOT NULL AUTO_INCREMENT,
