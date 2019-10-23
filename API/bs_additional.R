@@ -68,7 +68,7 @@ function(token = "", a1 = "", a2 = "", a3 = "", a4 = "", a5 = ""){
   results <- cbind.data.frame(db, answer) %>%
     mutate(points = ifelse(correct_answer == answer, 1, 0))
   pc_id <- questions$pc_id
-  max_speed <- (sum(results$points) * 0.6 / 5)
+  max_speed <- (0.4 + 0.2* sum(results$points)/5)
   speed_params <- list(pc_id = pc_id, speed = max_speed)
   POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
   list(db = results, max_speed = max_speed)
