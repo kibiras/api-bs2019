@@ -1,7 +1,7 @@
 # bs.R
 
-#' @apiTitle Build Stuff 2019
-#' @apiDescription Tune your car using the REST API
+#' @apiTitle Build Stuff 2019 additional API
+#' @apiDescription quiz + just drive endpoints
 options(encoding='UTF-8')
 library(RMariaDB)
 library(DBI)
