@@ -74,3 +74,33 @@ function(token = "", a1 = "", a2 = "", a3 = "", a4 = "", a5 = ""){
   list(db = results, max_speed = max_speed)
   
 }
+
+#* Start driving!
+#* @param token Game Token
+#* @post /startDriveUI
+function(token = ""){
+  if (token %in% dbGetQuery(con, "select distinct token from game_info")$token) {
+    game_info <- dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))
+    max_speed <- (0.6 + ifelse(sum(game_info[4:7]) == 4, 0.1, 0) + ifelse(sum(game_info[8:9]) == 0, 0.1, 0))
+    pc_id <- game_info$pc_id
+    speed_params <- list(pc_id = pc_id, speed = max_speed)
+    POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
+    list(Message = paste0("Contratulations, you are ready to go!"),
+         max_speed = max_speed)
+  }
+  else {
+    text <- "Please enter valid token"
+  }
+}
+
+#* Start driving!
+#* @post /startJustDrive
+function(req){
+  ip <- req$REMOTE_ADDR
+  max_speed <- 0.4
+  pc_id <- as.integer(stri_replace_all_fixed(ip, ".", "")) %% 2
+  speed_params <- list(pc_id = pc_id, speed = max_speed)
+  POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
+  list(Message = paste0("Contratulations, you are ready to go!"),
+         max_speed = max_speed)
+}

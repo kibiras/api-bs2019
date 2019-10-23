@@ -15,6 +15,7 @@ dbSendQuery(con, "create table seb.game_info (
             barrier INT,
 			      ip VARCHAR(50),
 			      pc_id INT,
+			      date VARCHAR(50),
             PRIMARY KEY (id))")
 
 dbSendQuery(con, "drop table seb.game_quiz")

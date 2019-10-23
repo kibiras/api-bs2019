@@ -28,20 +28,20 @@ cors <- function(res) {
 }
 
 #* Get your game ID
-#* @param driver_name Enter Your nickname
 #* @post /startGame
-function(driver_name = "", req){
+function(req){
   newest_id <- dbGetQuery(con, "select max(id) as id from game_info")
   car <- sample(data.frame(0,1,1,1))
   names(car) <- c("fuel","battery","tires","turbo_charger")
   road <- sample(data.frame(0,1))
   names(road) <- c("pithole","barrier")
-  name <- driver_name
+  name <- "noname"
   id <- newest_id$id +1
   ip <- req$REMOTE_ADDR
   pc_id <- as.integer(stri_replace_all_fixed(ip, ".", "")) %% 2
+  date <- Sys.time()
   token <- paste0(md5(paste0(id, name)))
-  df <- cbind(id , name, token, car, road, ip, pc_id)
+  df <- cbind(id , name, token, car, road, ip, pc_id, date)
   dbWriteTable(con, "game_info", df, append = TRUE)
   list(Message = "Success",
        token = token)
@@ -139,11 +139,11 @@ function(token = "", fuel = "", battery = "", tires = "", turbo_charger = ""){
 function(token = ""){
   if (token %in% dbGetQuery(con, "select distinct token from game_info")$token) {
     game_info <- dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))
-    max_speed <- (2 + sum(game_info[4:7]) - sum(game_info[8:9]))/6
+    max_speed <- (0.6 + ifelse(sum(game_info[4:7]) == 4, 0.2, 0) + ifelse(sum(game_info[8:9]) == 0, 0.2, 0))
     pc_id <- game_info$pc_id
     speed_params <- list(pc_id = pc_id, speed = max_speed)
     POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
-    list(Message = paste0("Contratulations ", dbGetQuery(con, paste0("select name from game_info where token = '", token, "'"))$name),
+    list(Message = paste0("Contratulations, you are ready to go!"),
          max_speed = max_speed)
   }
   else {

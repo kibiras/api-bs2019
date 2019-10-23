@@ -25,7 +25,7 @@ source("runAPI.R")
 
 R runs swagger on localhost: http://127.0.0.1:8000/__swagger__/
 
-## Hosting API locally
+## Hosting API locally (Linux)
 
 ```bash
 sudo nano /etc/systemd/system/plumber-api.service
