@@ -1,0 +1,22 @@
+main {
+  margin: 66px auto 91px;
+  max-width: 1600px;
+  padding: 50px;
+}
+@mixin generateWidths {
+  @for $var from 0 to 99 {
+    .w-#{$var} {
+      width: $var + 0%;
+    }
+  }
+}
+
+@include generateWidths;
+
+html {
+  width: 100%;
+  height: 100%;
+  body {
+    background-color: transparent;
+  }
+}

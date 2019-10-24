@@ -1,0 +1,77 @@
+@import '../../../../node_modules/@sebgroup/bootstrap/scss/variables';
+
+#diagnostics {
+  aside {
+    width: 49%;
+    float: left;
+    border: 1px dashed $gray-500;
+    padding: 10px;
+    min-height: 350px;
+    border-radius: 5px;
+    + aside {
+      margin-left: 2%;
+    }
+    &.test-results {
+      display: none;
+    }
+    h4 {
+      border-bottom: 1px dashed $gray-400;
+      padding-bottom: 5px;
+      overflow: hidden;
+      .diagnose-button {
+        float: right;
+      }
+    }
+    ul {
+      li {
+        padding: 5px;
+        font-size: 20px;
+        border-bottom: 1px dotted $gray-300;
+        overflow: hidden;
+        line-height: 44px;
+        &:last-child {
+          border: 0;
+        }
+        .incorrect {
+          color: $red-dark;
+        }
+        .correct {
+          color: $green-darker;
+        }
+        .question {
+          color: $yellow-dark;
+        }
+        button {
+          float: right;
+          .spinner {
+            margin-left: 5px;
+            display: none;
+          }
+          &.clicked {
+            .spinner {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.with-test-results {
+    aside {
+      width: 32%;
+      margin-left: 2%;
+      &.car-diagnostics {
+        margin-left: 0;
+      }
+      &.test-results {
+        display: block;
+      }
+    }
+  }
+}
+#test-start-drive {
+  clear: both;
+  * {
+    font-size: 20px;
+  }
+}

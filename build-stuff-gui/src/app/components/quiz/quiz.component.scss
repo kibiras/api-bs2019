@@ -1,0 +1,28 @@
+@import '../../../../node_modules/@sebgroup/bootstrap/scss/variables';
+
+aside {
+  width: 100%;
+  float: left;
+  border: 1px dashed $gray-500;
+  padding: 10px;
+  border-radius: 5px;
+  h4 {
+    border-bottom: 1px dashed $gray-400;
+    padding-bottom: 5px;
+    overflow: hidden;
+  }
+}
+table {
+  tr {
+    td {
+      padding: 5px;
+      font-weight: bold;
+      &.wrong {
+        color: $red;
+      }
+      &.correct {
+        color: $green;
+      }
+    }
+  }
+}

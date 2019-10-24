@@ -1,0 +1,12 @@
+package.json
+package-lock.json
+dist
+docs
+.vscode/*
+node_modules
+.editorconfig
+.gitignore
+.prettierignore
+browserslist
+src/assets/*
+src/favicon.ico

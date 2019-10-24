@@ -1,0 +1,17 @@
+footer {
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  border-top: 1px dashed #343434;
+  background-color: #f8f8f8;
+}
+.logos {
+  img {
+    width: 8%;
+    height: auto;
+    max-width: 60px;
+    margin: 0 10px;
+  }
+}

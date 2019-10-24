@@ -1,0 +1,57 @@
+<div class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Enter your information to start a game</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="modalForm">
+          <div class="form-group">
+            <label for="name">Nickname:</label>
+            <input class="form-control" id="name" type="text" formControlName="name" placeholder="Nickname" />
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail(Optional)<sup>*,**</sup></label>
+            <input class="form-control" id="email" type="text" formControlName="email" placeholder="E-mail(Optional)" />
+          </div>
+          <div class="form-group">
+            * - Some text.<br />
+            ** - Some text.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="startGame()" type="submit" class="btn btn-primary w-100" [disabled]="modalForm.controls['name'].value.length < 1">
+          Start game
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="start-drive-description" class="modal fade d-none">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Congratulations</h4>
+      </div>
+      <div class="modal-body">You are ready to start to focus in race.<br />Your speed will be 40%.<br />Good luck!</div>
+      <div class="modal-footer">
+        <button id="again-button" type="button" class="btn btn-outline-danger w-100" (click)="startOver()">
+          <div class="spinner d-none" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          Start over <fa-icon [icon]="faFastBackward"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<article>
+  <button routerLink="swagger" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faSlidersH"></fa-icon> Swagger. (Max. 100% speed)</button>
+  <button routerLink="quiz" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faQuestion"></fa-icon> Quiz. (Max. 80% speed)</button>
+  <button (click)="startGameAndCallToGetToken()" routerLink="gui-drive" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faEye"></fa-icon> GUI. (Max. 60% speed)</button>
+  <button (click)="startDrive()" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faFlagCheckered"></fa-icon> Just drive. (40% speed)</button>
+</article>
