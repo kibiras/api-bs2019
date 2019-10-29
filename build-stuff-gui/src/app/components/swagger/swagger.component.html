@@ -1,1 +1,58 @@
+<div class="modal-backdrop fade d-none"></div>
+
+<div id="swagger-time-over" class="modal fade d-none">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Your time is over</h4>
+      </div>
+      <div class="modal-body">Are you finished with Swagger?</div>
+      <div class="modal-footer">
+        <div class="btn-group w-100" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-outline-danger" (click)="startGame()">No</button>
+          <button type="button" class="btn btn-outline-primary" (click)="finishGame()">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="start-drive-description" class="modal fade d-none">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Congratulations</h4>
+      </div>
+      <div class="modal-body">You are ready to start to focus in race.<br />Your speed will be <span id="counted-speed"></span>%.<br />Good luck!</div>
+      <div class="modal-footer">
+        <button id="again-button" type="button" class="btn btn-outline-danger w-100" (click)="startOver()">
+          <div class="spinner d-none" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          Start over <fa-icon [icon]="faFastBackward"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="finished-description" class="modal fade d-none">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Congratulations</h4>
+      </div>
+      <div class="modal-body">You are ready to start to focus in race.<br />Good luck!</div>
+      <div class="modal-footer">
+        <button id="again-button" type="button" class="btn btn-outline-danger w-100" (click)="startOver()">
+          <div class="spinner d-none" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          Start over <fa-icon [icon]="faFastBackward"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <iframe src="http://lsp7490d.sebank.se:8000/__swagger__/" width="100%" scrolling="no"></iframe>

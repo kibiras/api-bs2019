@@ -27,12 +27,23 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
   ngOnInit() {
-    this.driveName = localStorage.getItem('driveName');
-    this.driveEmail = localStorage.getItem('driveEmail');
+    localStorage.removeItem(`quiz-answer-0`);
+    localStorage.removeItem(`quiz-answer-1`);
+    localStorage.removeItem(`quiz-answer-2`);
+    localStorage.removeItem(`quiz-answer-3`);
+    localStorage.removeItem(`quiz-answer-4`);
 
-    this.quizService.getQuestions(this.driveName, this.driveEmail).subscribe(questions => {
+    this.driveName = localStorage.getItem('driveName');
+
+    this.quizService.getQuestions().subscribe(questions => {
       this.quizResult = questions;
       this.token = questions.quiz[0].token;
+      localStorage.setItem('token', this.token);
+      let i = 0;
+      questions.questions.forEach(element => {
+        localStorage.setItem(`quiz-answer-${i}`, `${element.correct_answer === 'True' ? 'false' : 'true'}`);
+        i++;
+      });
     });
   }
 
@@ -45,6 +56,7 @@ export class QuizComponent implements OnInit {
   }
 
   public answer(answer: boolean) {
+    localStorage.setItem(`quiz-answer-${this.answers.length}`, `${answer}`);
     this.answers.push(answer);
     this.currentQuestion++;
     if (this.currentQuestion === this.quizResult.questions.length) {
@@ -68,6 +80,7 @@ export class QuizComponent implements OnInit {
 
   public startDrive() {
     document.querySelector('#start-button div').classList.remove('d-none');
+    localStorage.setItem('timerStart', 'false');
     setTimeout(() => {
       this.quizService.postQuizResults(this.token, this.getStringAnswer(0), this.getStringAnswer(1), this.getStringAnswer(2), this.getStringAnswer(3), this.getStringAnswer(4)).subscribe(result => {
         this.speed = result.speed[0] * 100;

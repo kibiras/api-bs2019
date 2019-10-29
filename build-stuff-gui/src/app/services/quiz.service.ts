@@ -12,8 +12,8 @@ export class QuizService {
 
   constructor(private http: HttpClient) {}
 
-  getQuestions(name: string, email: string): Observable<Questions> {
-    return this.http.get<Questions>(`${this.apiDoamin}getQuestions?name=${name}&email=${email}`);
+  getQuestions(): Observable<Questions> {
+    return this.http.get<Questions>(`${this.apiDoamin}getQuestions`);
   }
 
   postQuizResults(token: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string): Observable<QuizResult> {

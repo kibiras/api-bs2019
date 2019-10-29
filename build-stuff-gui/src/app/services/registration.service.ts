@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Diagnostics } from './../models/diagnostics';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GameService {
+export class RegistrationService {
   apiDoamin = 'http://lsp7490d.sebank.se:8000/';
 
   constructor(private http: HttpClient) {}
 
+  postRegisterNewGame(nickname: string, email: string, agreedLeaderBoard: boolean, agreedInformation: boolean): Observable<{}> {
+    return this.http.post<{}>(`${this.apiDoamin}registration?nickname=${nickname}&email=${email}&agreedLeaderBoard=${agreedLeaderBoard}&agreedInformation=${agreedInformation}`, null);
+  }
+  /*
   postStartGame(): Observable<{}> {
     return this.http.post<{}>(`${this.apiDoamin}startGame`, null);
   }
@@ -33,5 +36,5 @@ export class GameService {
 
   postStartDrive(token: string): Observable<{}> {
     return this.http.post<{}>(`${this.apiDoamin}startDrive?token=${token}`, null);
-  }
+  }*/
 }
