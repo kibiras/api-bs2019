@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "publish": "ng build --prod --output-path docs --base-href",
     "test": "ng test",
@@ -27,7 +27,8 @@
     "@sebgroup/bootstrap": "^4.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "dotenv": "^5.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.801.2",

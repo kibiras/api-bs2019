@@ -3,14 +3,19 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Diagnostics } from './../models/diagnostics';
 
+import { environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  apiDoamin = 'http://lsp7490d.sebank.se:8000/';
+  apiDoamin = 'http://'+environment.host+':8000/';
+  apiDoaminForDrive = 'http://'+environment.host+':8001/';
 
   constructor(private http: HttpClient) {}
 
+  startJustDrive(): Observable<{}> {
+    return this.http.post<{}>(`${this.apiDoaminForDrive}startJustDrive`, null);
+  }
   postStartGame(driverName: string, driverEmail: string): Observable<{}> {
     return this.http.post<{}>(`${this.apiDoamin}startGame?driver_name=${driverName}&driver_email=${driverEmail}`, null);
   }

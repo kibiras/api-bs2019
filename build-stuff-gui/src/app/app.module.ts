@@ -12,7 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { StartpageComponent } from './components/startpage/startpage.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { SwaggerComponent } from './components/swagger/swagger.component';
-
+import { ɵDomSanitizerImpl} from '@angular/platform-browser';
 const appRoutes: Routes = [
   { path: 'gui-drive', component: ContentComponent },
   { path: 'quiz', component: QuizComponent },
@@ -24,7 +24,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, ContentComponent, StartpageComponent, QuizComponent, SwaggerComponent],
   imports: [RouterModule.forRoot(appRoutes), BrowserModule, AppRoutingModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule],
-  providers: [],
+  providers: [ɵDomSanitizerImpl],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

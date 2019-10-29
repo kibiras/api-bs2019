@@ -25,6 +25,21 @@ export class StartpageComponent implements OnInit {
   faFastBackward = faFastBackward;
 
   ngOnInit() {}
+  public startJustDrive() {
+    this.gameService.startJustDrive().subscribe(token => {
+      localStorage.setItem('token', token['token']);
+      setTimeout(() => {
+        this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
+          const modalBack = document.querySelector('.modal-backdrop');
+          const modal = document.querySelector('#start-drive-description');
+          modalBack.classList.add('show', 'd-block');
+          modalBack.classList.remove('d-none');
+          modal.classList.add('show', 'd-block');
+          modal.classList.remove('d-none');
+        });
+      }, 1000);
+    });
+  }
 
   public startDrive() {
     this.gameService.postStartGame(localStorage.getItem('driveName'), localStorage.getItem('driveEmail')).subscribe(token => {

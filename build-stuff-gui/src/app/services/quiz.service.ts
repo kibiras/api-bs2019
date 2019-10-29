@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Questions } from '../models/questions';
 import { QuizResult } from '../models/quizResult';
+import { environment} from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
-  apiDoamin = 'http://lsp7490d.sebank.se:8001/';
+  apiDoamin = 'http://'+environment.host+':8001/';
 
   constructor(private http: HttpClient) {}
 
