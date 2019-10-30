@@ -37,6 +37,6 @@ export class GameService {
   }
 
   postStartDrive(token: string): Observable<{}> {
-    return this.http.post<{}>(`${this.apiDoamin}startDrive?token=${token}`, null);
+    return this.http.post<{}>(`${this.apiDoaminForDrive}startDriveUI?token=${token}`, null);
   }
 }

@@ -7,7 +7,7 @@ import { environment} from '../../environments/environment'
   providedIn: 'root'
 })
 export class RegistrationService {
-  apiDoamin = 'http://'+environment.host+':8002/';
+  apiDoamin = 'http://'+environment.host+':8001/';
 
   constructor(private http: HttpClient) {}
 

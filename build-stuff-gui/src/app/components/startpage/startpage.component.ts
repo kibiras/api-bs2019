@@ -30,16 +30,12 @@ export class StartpageComponent implements OnInit {
   public startJustDrive() {
     this.gameService.startJustDrive().subscribe(token => {
       localStorage.setItem('token', token['token']);
-      setTimeout(() => {
-        this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
           const modalBack = document.querySelector('.modal-backdrop');
           const modal = document.querySelector('#start-drive-description');
           modalBack.classList.add('show', 'd-block');
           modalBack.classList.remove('d-none');
           modal.classList.add('show', 'd-block');
           modal.classList.remove('d-none');
-        });
-      }, 1000);
     });
   }
   ngOnInit() {
@@ -55,7 +51,7 @@ export class StartpageComponent implements OnInit {
       localStorage.setItem('token', token['token']);
       setTimeout(() => {
         this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
-          document.querySelector('#counted-speed').textContent = result['max_speed'];
+          document.querySelector('#counted-speed').textContent = ""+parseInt((result['speed']*100)+"");
           const modalBack = document.querySelector('.modal-backdrop');
           const modal = document.querySelector('#start-drive-description');
           modalBack.classList.add('show', 'd-block');
