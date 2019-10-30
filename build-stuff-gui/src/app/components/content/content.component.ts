@@ -51,7 +51,10 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.token = localStorage.getItem('token');
+    this.gameService.postStartGame().subscribe(token => {
+      localStorage.setItem('token', token['token']);
+      this.token = localStorage.getItem('token');
+    });
     this.driveName = localStorage.getItem('driveName');
   }
 
@@ -200,6 +203,7 @@ export class ContentComponent implements OnInit {
 
   public startDrive() {
     document.querySelector('#start-button div').classList.remove('d-none');
+    localStorage.setItem('timerStart', 'false');
     setTimeout(() => {
       this.gameService.postStartDrive(this.token).subscribe(result => {
         this.speed = result['max_speed'];

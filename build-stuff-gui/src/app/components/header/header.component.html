@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand logos" routerLink="">
+    <span class="navbar-brand logos" routerLink="" (click)="reStartTimer()">
       <svg preserveAspectRatio="xMidYMid meet" data-bbox="99.9 107.278 285.59 151.942" viewBox="99.9 107.278 285.59 151.942" xmlns="http://www.w3.org/2000/svg" data-type="color" role="img">
         <g>
           <path
@@ -13,3 +13,4 @@
     </span>
   </nav>
 </header>
+<span id="timer" [ngClass]="timerClass()">{{ minutes }} Min {{ seconds }} Sec</span>
