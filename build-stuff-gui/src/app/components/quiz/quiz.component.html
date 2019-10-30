@@ -22,16 +22,16 @@
 </div>
 
 <article class="mt-3 overflow-hidden" *ngIf="token">
-  <h3>Player name: {{ driveName }}</h3>
+  <h4>Player name: {{ driveName }}</h4>
 
   <aside class="question" *ngIf="!quizFinished">
-    <h4>Category: {{ (quizResult?.questions)[currentQuestion].category }}, difficulty: {{ (quizResult?.questions)[currentQuestion].difficulty }}</h4>
+    <h5>Category: {{ (quizResult?.questions)[currentQuestion].category }}, difficulty: {{ (quizResult?.questions)[currentQuestion].difficulty }}</h5>
 
     <div class="progress mt-3 mb-3">
       <div class="progress-bar progress-bar-striped {{ getProgressStyle() }}" role="progressbar"></div>
     </div>
 
-    <h4 [innerHTML]="(quizResult?.questions)[currentQuestion].question"></h4>
+    <h3 [innerHTML]="(quizResult?.questions)[currentQuestion].question"></h3>
     <div class="btn-group w-100" role="group">
       <button (click)="answer(false)" type="button" class="btn btn-lg btn-outline-danger">
         No

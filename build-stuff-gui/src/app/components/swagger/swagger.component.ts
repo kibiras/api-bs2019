@@ -3,21 +3,20 @@ import { SafeResourceUrl, ɵDomSanitizerImpl } from '@angular/platform-browser';
 import { faFastBackward } from '@fortawesome/free-solid-svg-icons';
 import { GameService } from './../../services/game.service';
 
-
-import { environment} from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-swagger',
   templateUrl: './swagger.component.html',
   styleUrls: ['./swagger.component.scss']
 })
 export class SwaggerComponent implements OnInit {
-  host// = "http://"+environment.host+":8000/__swagger__/";
+  host; // = "http://"+environment.host+":8000/__swagger__/";
 
-  constructor(sanitizer: ɵDomSanitizerImpl,private gameService: GameService) {
-    this.host = sanitizer.bypassSecurityTrustResourceUrl("http://"+environment.host+":8000/__swagger__/");
+  constructor(sanitizer: ɵDomSanitizerImpl, private gameService: GameService) {
+    this.host = sanitizer.bypassSecurityTrustResourceUrl('http://' + environment.host + ':8000/__swagger__/');
   }
-  get(){
-    return this.host
+  get() {
+    return this.host;
   }
   faFastBackward = faFastBackward;
 

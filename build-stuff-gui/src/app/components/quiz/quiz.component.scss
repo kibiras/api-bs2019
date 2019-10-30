@@ -6,7 +6,8 @@ aside {
   border: 1px dashed $gray-500;
   padding: 10px;
   border-radius: 5px;
-  h4 {
+  h5,
+  h3 {
     border-bottom: 1px dashed $gray-400;
     padding-bottom: 5px;
     overflow: hidden;
