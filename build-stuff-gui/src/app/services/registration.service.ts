@@ -7,12 +7,12 @@ import { environment} from '../../environments/environment'
   providedIn: 'root'
 })
 export class RegistrationService {
-  apiDoamin = 'http://'+environment.host+':8000/';
+  apiDoamin = 'http://'+environment.host+':8002/';
 
   constructor(private http: HttpClient) {}
 
   postRegisterNewGame(nickname: string, email: string, agreedLeaderBoard: boolean, agreedInformation: boolean): Observable<{}> {
-    return this.http.post<{}>(`${this.apiDoamin}registration?nickname=${nickname}&email=${email}&agreedLeaderBoard=${agreedLeaderBoard}&agreedInformation=${agreedInformation}`, null);
+    return this.http.post<{}>(`${this.apiDoamin}register?nickname=${nickname}&email=${email}&agreedLeaderBoard=${agreedLeaderBoard}&agreedInformation=${agreedInformation}`, null);
   }
   /*
   postStartGame(): Observable<{}> {

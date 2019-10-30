@@ -72,7 +72,7 @@ export class StartpageComponent implements OnInit {
     localStorage.setItem('driveEmail', this.modalForm.controls.email.value);
     localStorage.setItem('agreeToShowInLeaderBoard', this.modalForm.controls.agreeToShowInLeaderBoard.value);
     localStorage.setItem('agreeToGetInformation', this.modalForm.controls.agreeToGetInformation.value);
-    /*
+    
     this.registrationService
       .postRegisterNewGame(
         this.modalForm.controls.name.value,
@@ -81,18 +81,18 @@ export class StartpageComponent implements OnInit {
         this.modalForm.controls.agreeToGetInformation.value
       )
       .subscribe(
-        result => {*/
-    const modalBack = document.querySelector('.modal-backdrop');
-    const modal = document.querySelector('.modal.show');
-    modalBack.classList.remove('show', 'd-block');
-    modalBack.classList.add('d-none');
-    modal.classList.remove('show', 'd-block');
-    modal.classList.add('d-none');
-    /*},
+        result => {
+        const modalBack = document.querySelector('.modal-backdrop');
+        const modal = document.querySelector('.modal.show');
+        modalBack.classList.remove('show', 'd-block');
+        modalBack.classList.add('d-none');
+        modal.classList.remove('show', 'd-block');
+        modal.classList.add('d-none');
+    },
         () => {
           alert('SOMETHING WRONG');
         }
-      );*/
+      );
   }
 
   public startOver() {
