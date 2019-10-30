@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Diagnostics } from './../models/diagnostics';
 
-import { environment} from '../../environments/environment'
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  apiDoamin = 'http://'+environment.host+':8000/';
-  apiDoaminForDrive = 'http://'+environment.host+':8001/';
+  apiDoamin = 'http://' + environment.host + ':8000/';
+  apiDoaminForDrive = 'http://' + environment.host + ':8001/';
 
   constructor(private http: HttpClient) {}
 
