@@ -1,7 +1,9 @@
 # bs.R
 
 #' @apiTitle Build Stuff 2019
-#' @apiDescription Tune your car using the REST API
+#' @apiDescription Tune your car using the REST API in order to reach the max speed!
+#' Get the token and fix your car problems.
+#' Start with the first endpoint startGame and continue.
 options(encoding='UTF-8')
 library(RMariaDB)
 library(DBI)
@@ -9,8 +11,9 @@ library(openssl)
 library(httr)
 library(jsonlite)
 library(stringi)
-# con <- dbConnect(RMariaDB::MariaDB(), user = "root", db = "seb")
+
 con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
+car_api <- "http://127.0.0.1:9000/api/config"
 
 #* Log some information about the incoming request
 #* @filter logger
@@ -27,7 +30,7 @@ cors <- function(res) {
   plumber::forward()
 }
 
-#* Get your game ID
+#* Get your game token
 #* @post /startGame
 function(req){
   newest_id <- dbGetQuery(con, "select max(id) as id from game_info")
@@ -38,7 +41,7 @@ function(req){
   name <- "noname"
   id <- newest_id$id +1
   ip <- req$REMOTE_ADDR
-  pc_id <- as.integer(stri_replace_all_fixed(ip, ".", "")) %% 2
+  pc_id <- as.integer(stri_sub(ip, -1)) %% 2
   date <- Sys.time()
   token <- paste0(md5(paste0(id, name)))
   df <- cbind(id , name, token, car, road, ip, pc_id, date)
@@ -47,7 +50,7 @@ function(req){
        token = token)
 }
 
-#* Test Drive Info
+#* Find out the problems
 #* @param token Game Token
 #* @get /testDrive
 function(token = ""){
@@ -67,7 +70,7 @@ function(token = ""){
   }
 }
 
-#* Run car diagnostics
+#* List all problems
 #* @param token Game Token
 #* @get /diagnostics
 function(token = ""){
@@ -81,7 +84,7 @@ function(token = ""){
 }
 
 
-#* Fix road problem
+#* Fix road issues
 #* @param token Game Token
 #* @param pithole 
 #* @param barrier 
@@ -103,7 +106,7 @@ function(token = "", pithole = "", barrier = ""){
   }
 }
 
-#* Fix car problem
+#* Fix car issues
 #* @param token Game Token
 #* @param fuel Fuel status
 #* @param battery Battery status
@@ -139,10 +142,10 @@ function(token = "", fuel = "", battery = "", tires = "", turbo_charger = ""){
 function(token = ""){
   if (token %in% dbGetQuery(con, "select distinct token from game_info")$token) {
     game_info <- dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))
-    max_speed <- (0.6 + ifelse(sum(game_info[4:7]) == 4, 0.2, 0) + ifelse(sum(game_info[8:9]) == 0, 0.2, 0))
+    max_speed <- (0.4 + ifelse(sum(game_info[4:7]) == 4, 0.3, 0) + ifelse(sum(game_info[8:9]) == 0, 0.3, 0))
     pc_id <- game_info$pc_id
     speed_params <- list(pc_id = pc_id, speed = max_speed)
-    POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
+    POST(car_api, content_type_json(), body = speed_params, encode = "json")
     list(Message = paste0("Contratulations, you are ready to go!"),
          max_speed = max_speed)
   }

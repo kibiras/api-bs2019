@@ -83,7 +83,7 @@ export class QuizComponent implements OnInit {
     localStorage.setItem('timerStart', 'false');
     setTimeout(() => {
       this.quizService.postQuizResults(this.token, this.getStringAnswer(0), this.getStringAnswer(1), this.getStringAnswer(2), this.getStringAnswer(3), this.getStringAnswer(4)).subscribe(result => {
-        this.speed = result.speed[0] * 100;
+        this.speed = parseInt(result.speed[0] * 100 + '');
         const modalBack = document.querySelector('.modal-backdrop');
         const modal = document.querySelector('#start-drive-description');
         modalBack.classList.add('show', 'd-block');

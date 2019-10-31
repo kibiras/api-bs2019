@@ -12,6 +12,7 @@ library(jsonlite)
 library(stringi)
 library(httr)
 con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
+car_api <- "http://127.0.0.1:9000/api/config"
 
 #* Log some information about the incoming request
 #* @filter logger
@@ -46,7 +47,7 @@ function(name = "", req){
   q3 <- questions$id[3]
   q4 <- questions$id[4]
   q5 <- questions$id[5]
-  pc_id <- as.integer(stri_replace_all_fixed(ip, ".", "")) %% 2
+  pc_id <- as.integer(stri_sub(ip, -1)) %% 2
   df <- cbind.data.frame(id , name, token, q1, q2, q3, q4, q5 , ip, pc_id)
   dbWriteTable(con, "game_quiz", df, append = TRUE)
   list(quiz = df, questions = questions)
@@ -68,10 +69,10 @@ function(token = "", a1 = "", a2 = "", a3 = "", a4 = "", a5 = ""){
   results <- cbind.data.frame(db, answer) %>%
     mutate(points = ifelse(correct_answer == answer, 1, 0))
   pc_id <- questions$pc_id
-  max_speed <- (0.4 + 0.2* sum(results$points)/5)
+  max_speed <- (0.4 + 0.4 * sum(results$points)/5)
   speed_params <- list(pc_id = pc_id, speed = max_speed)
-  POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
-  list(db = results, max_speed = max_speed)
+  POST(car_api, content_type_json(), body = speed_params, encode = "json")
+  list(db = results, speed = max_speed)
   
 }
 
@@ -81,10 +82,10 @@ function(token = "", a1 = "", a2 = "", a3 = "", a4 = "", a5 = ""){
 function(token = ""){
   if (token %in% dbGetQuery(con, "select distinct token from game_info")$token) {
     game_info <- dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))
-    max_speed <- (0.6 + ifelse(sum(game_info[4:7]) == 4, 0.1, 0) + ifelse(sum(game_info[8:9]) == 0, 0.1, 0))
+    max_speed <- (0.4 + ifelse(sum(game_info[4:7]) == 4, 0.1, 0) + ifelse(sum(game_info[8:9]) == 0, 0.1, 0))
     pc_id <- game_info$pc_id
     speed_params <- list(pc_id = pc_id, speed = max_speed)
-    POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
+    POST(car_api, content_type_json(), body = speed_params, encode = "json")
     list(Message = paste0("Contratulations, you are ready to go!"),
          max_speed = max_speed)
   }
@@ -98,9 +99,22 @@ function(token = ""){
 function(req){
   ip <- req$REMOTE_ADDR
   max_speed <- 0.4
-  pc_id <- as.integer(stri_replace_all_fixed(ip, ".", "")) %% 2
+  pc_id <- as.integer(stri_sub(ip, -1)) %% 2
   speed_params <- list(pc_id = pc_id, speed = max_speed)
-  POST("http://127.0.0.1:9000/api/config", content_type_json(), body = speed_params, encode = "json")
+  POST(car_api, content_type_json(), body = speed_params, encode = "json")
   list(Message = paste0("Contratulations, you are ready to go!"),
          max_speed = max_speed)
 }
+
+#* @post /register
+#* @param nickname username
+#* @param email email
+function(nickname = "", email = ""){
+  username <- nickname
+  email <- email
+  df <- cbind(username, email) %>%
+    as_tibble()
+  dbWriteTable(con, "users", df, append = TRUE)
+  list(Message = "Success")
+}
+
