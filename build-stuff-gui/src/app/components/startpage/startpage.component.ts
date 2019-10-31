@@ -11,6 +11,7 @@ import { GameService } from './../../services/game.service';
 })
 export class StartpageComponent implements OnInit {
   modalForm: FormGroup;
+  ongoingRegistration = false;
 
   constructor(private formBuilder: FormBuilder, private gameService: GameService, private registrationService: RegistrationService) {
     this.modalForm = this.formBuilder.group({
@@ -47,7 +48,7 @@ export class StartpageComponent implements OnInit {
   }
 
   public isDisabled(): boolean {
-    return this.modalForm.controls['name'].value.length < 1;
+    return this.modalForm.controls['name'].value.length < 1 || this.ongoingRegistration;
   }
 
   public startDrive() {
@@ -68,6 +69,7 @@ export class StartpageComponent implements OnInit {
   }
 
   public startGame() {
+    this.ongoingRegistration = true;
     localStorage.setItem('driveName', this.modalForm.controls.name.value);
     localStorage.setItem('driveEmail', this.modalForm.controls.email.value);
     localStorage.setItem('agreeToShowInLeaderBoard', this.modalForm.controls.agreeToShowInLeaderBoard.value);
@@ -90,6 +92,7 @@ export class StartpageComponent implements OnInit {
           modal.classList.add('d-none');
         },
         () => {
+          this.ongoingRegistration = false;
           alert('SOMETHING WRONG');
         }
       );
