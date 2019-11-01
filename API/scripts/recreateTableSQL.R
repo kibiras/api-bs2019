@@ -30,4 +30,20 @@ dbSendQuery(con, "create table seb.game_quiz (
             q5 VARCHAR(200),
 			      ip VARCHAR(50),
             pc_id INT,
+            date VARCHAR(50),
             PRIMARY KEY (id))")
+
+dbSendQuery(con, "drop table seb.users")
+dbSendQuery(con, "create table seb.users (
+            id INT NOT NULL AUTO_INCREMENT,
+            username VARCHAR(200),
+            email VARCHAR(200),
+            leaderboard INT, 
+            communication INT, 
+            pc_id INT, 
+            game_id INT, 
+            date VARCHAR(200),
+            PRIMARY KEY (id))")
+
+
+

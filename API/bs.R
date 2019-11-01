@@ -11,9 +11,10 @@ library(openssl)
 library(httr)
 library(jsonlite)
 library(stringi)
+library(dplyr)
+library(magrittr)
 
-con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
-car_api <- "http://127.0.0.1:9000/api/config"
+source("config.R")
 
 #* Log some information about the incoming request
 #* @filter logger
@@ -44,7 +45,7 @@ function(req){
   pc_id <- as.integer(stri_sub(ip, -1)) %% 2
   date <- Sys.time()
   token <- paste0(md5(paste0(id, name)))
-  df <- cbind(id , name, token, car, road, ip, pc_id, date)
+  df <- cbind.data.frame(id, name, token, car, road, ip, pc_id, date) 
   dbWriteTable(con, "game_info", df, append = TRUE)
   list(Message = "Success",
        token = token)

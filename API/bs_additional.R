@@ -11,8 +11,8 @@ library(magrittr)
 library(jsonlite)
 library(stringi)
 library(httr)
-con <- dbConnect(RMariaDB::MariaDB(), user = "seb", db = "seb")
-car_api <- "http://127.0.0.1:9000/api/config"
+
+source("config.R")
 
 #* Log some information about the incoming request
 #* @filter logger
@@ -48,7 +48,8 @@ function(name = "", req){
   q4 <- questions$id[4]
   q5 <- questions$id[5]
   pc_id <- as.integer(stri_sub(ip, -1)) %% 2
-  df <- cbind.data.frame(id , name, token, q1, q2, q3, q4, q5 , ip, pc_id)
+  date <- Sys.time()
+  df <- cbind.data.frame(id , name, token, q1, q2, q3, q4, q5 , ip, pc_id, date)
   dbWriteTable(con, "game_quiz", df, append = TRUE)
   list(quiz = df, questions = questions)
   
@@ -109,11 +110,17 @@ function(req){
 #* @post /register
 #* @param nickname username
 #* @param email email
-function(nickname = "", email = ""){
+#* @param leaderboard leaderboard
+#* @param communication communication
+function(nickname = "", email = "", leaderboard = "", communication = ""){
   username <- nickname
   email <- email
-  df <- cbind(username, email) %>%
-    as_tibble()
+  leaderboard <- 1
+  communication <- 0
+  pc_id <- 1
+  game_id <- 1
+  date <- Sys.time()
+  df <- cbind.data.frame(username, email, leaderboard, communication, pc_id, game_id, date) 
   dbWriteTable(con, "users", df, append = TRUE)
   list(Message = "Success")
 }
