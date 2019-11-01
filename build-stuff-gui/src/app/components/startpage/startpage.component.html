@@ -5,8 +5,8 @@
       <div class="modal-header">
         <h4 class="modal-title">Enter your information to start a game</h4>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="modalForm">
+      <form [formGroup]="modalForm">
+        <div class="modal-body">
           <div class="form-group">
             <label for="name">Nickname:</label>
             <input class="form-control" id="name" type="text" formControlName="name" placeholder="Nickname" />
@@ -34,13 +34,13 @@
               </label>
             </div>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button (click)="startGame()" type="submit" class="btn btn-primary w-100" [disabled]="isDisabled()">
-          Start game
-        </button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button id="register-new-gamer" (click)="startGame()" type="submit" class="btn btn-primary w-100" [disabled]="isDisabled()">
+            Start game
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

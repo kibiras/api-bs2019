@@ -11,6 +11,7 @@ import { GameService } from './../../services/game.service';
 })
 export class StartpageComponent implements OnInit {
   modalForm: FormGroup;
+  ongoingRegistration = false;
 
   constructor(private formBuilder: FormBuilder, private gameService: GameService, private registrationService: RegistrationService) {
     this.modalForm = this.formBuilder.group({
@@ -30,12 +31,12 @@ export class StartpageComponent implements OnInit {
   public startJustDrive() {
     this.gameService.startJustDrive().subscribe(token => {
       localStorage.setItem('token', token['token']);
-          const modalBack = document.querySelector('.modal-backdrop');
-          const modal = document.querySelector('#start-drive-description');
-          modalBack.classList.add('show', 'd-block');
-          modalBack.classList.remove('d-none');
-          modal.classList.add('show', 'd-block');
-          modal.classList.remove('d-none');
+      const modalBack = document.querySelector('.modal-backdrop');
+      const modal = document.querySelector('#start-drive-description');
+      modalBack.classList.add('show', 'd-block');
+      modalBack.classList.remove('d-none');
+      modal.classList.add('show', 'd-block');
+      modal.classList.remove('d-none');
     });
   }
   ngOnInit() {
@@ -43,7 +44,7 @@ export class StartpageComponent implements OnInit {
   }
 
   public isDisabled(): boolean {
-    return this.modalForm.controls['name'].value.length < 1;
+    return this.modalForm.controls['name'].value.length < 1 || this.ongoingRegistration;
   }
 
   public startDrive() {
@@ -51,7 +52,7 @@ export class StartpageComponent implements OnInit {
       localStorage.setItem('token', token['token']);
       setTimeout(() => {
         this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
-          document.querySelector('#counted-speed').textContent = ""+parseInt((result['speed']*100)+"");
+          document.querySelector('#counted-speed').textContent = '' + parseInt(result['speed'] * 100 + '');
           const modalBack = document.querySelector('.modal-backdrop');
           const modal = document.querySelector('#start-drive-description');
           modalBack.classList.add('show', 'd-block');
@@ -64,6 +65,7 @@ export class StartpageComponent implements OnInit {
   }
 
   public startGame() {
+    this.ongoingRegistration = true;
     localStorage.setItem('driveName', this.modalForm.controls.name.value);
     localStorage.setItem('driveEmail', this.modalForm.controls.email.value);
     localStorage.setItem('agreeToShowInLeaderBoard', this.modalForm.controls.agreeToShowInLeaderBoard.value);
@@ -86,6 +88,7 @@ export class StartpageComponent implements OnInit {
           modal.classList.add('d-none');
         },
         () => {
+          this.ongoingRegistration = false;
           alert('SOMETHING WRONG');
         }
       );
