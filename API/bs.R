@@ -43,7 +43,7 @@ function(req){
   id <- newest_id$id +1
   ip <- req$REMOTE_ADDR
   pc_id <- as.integer(stri_sub(ip, -1)) %% 2
-  date <- Sys.time()
+  date <- as.character(Sys.time())
   token <- paste0(md5(paste0(id, name)))
   df <- cbind.data.frame(id, name, token, car, road, ip, pc_id, date) 
   dbWriteTable(con, "game_info", df, append = TRUE)
