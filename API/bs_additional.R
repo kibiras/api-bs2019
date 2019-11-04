@@ -110,17 +110,19 @@ function(req){
 #* @post /register
 #* @param nickname username
 #* @param email email
-#* @param leaderboard leaderboard
-#* @param communication communication
-function(nickname = "", email = "", leaderboard = "", communication = ""){
+#* @param agreedLeaderBoard leaderboard
+#* @param agreedInformation communication
+function(nickname = "", email = "", agreedLeaderBoard = "", agreedInformation = "", req){
   username <- nickname
   email <- email
-  leaderboard <- 1
-  communication <- 0
+  leaderboard <- agreedLeaderBoard
+  communication <- agreedInformation
   pc_id <- 1
   game_id <- 1
   date <- Sys.time()
-  df <- cbind.data.frame(username, email, leaderboard, communication, pc_id, game_id, date) 
+  ip <- req$REMOTE_ADDR
+  api_pc_id <- as.integer(stri_sub(ip, -1)) %% 2
+  df <- cbind.data.frame(username, email, leaderboard, communication, pc_id, game_id, api_pc_id, ip, date) 
   dbWriteTable(con, "users", df, append = TRUE)
   list(Message = "Success")
 }

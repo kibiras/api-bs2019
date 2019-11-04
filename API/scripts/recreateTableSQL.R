@@ -38,10 +38,12 @@ dbSendQuery(con, "create table seb.users (
             id INT NOT NULL AUTO_INCREMENT,
             username VARCHAR(200),
             email VARCHAR(200),
-            leaderboard INT, 
-            communication INT, 
+            leaderboard VARCHAR(10), 
+            communication VARCHAR(10), 
             pc_id INT, 
             game_id INT, 
+            api_pc_id INT,
+            ip VARCHAR(200),
             date VARCHAR(200),
             PRIMARY KEY (id))")
 
