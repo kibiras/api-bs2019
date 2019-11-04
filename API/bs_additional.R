@@ -48,7 +48,7 @@ function(name = "", req){
   q4 <- questions$id[4]
   q5 <- questions$id[5]
   pc_id <- as.integer(stri_sub(ip, -1)) %% 2
-  date <- Sys.time()
+  date <- as.character(Sys.time())
   df <- cbind.data.frame(id , name, token, q1, q2, q3, q4, q5 , ip, pc_id, date)
   dbWriteTable(con, "game_quiz", df, append = TRUE)
   list(quiz = df, questions = questions)
@@ -119,7 +119,7 @@ function(nickname = "", email = "", agreedLeaderBoard = "", agreedInformation = 
   communication <- agreedInformation
   pc_id <- 1
   game_id <- 1
-  date <- Sys.time()
+  date <- as.character(Sys.time())
   ip <- req$REMOTE_ADDR
   api_pc_id <- as.integer(stri_sub(ip, -1)) %% 2
   df <- cbind.data.frame(username, email, leaderboard, communication, pc_id, game_id, api_pc_id, ip, date) 
