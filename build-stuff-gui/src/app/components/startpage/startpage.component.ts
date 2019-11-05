@@ -47,23 +47,6 @@ export class StartpageComponent implements OnInit {
     return this.modalForm.controls['name'].value.length < 1 || this.ongoingRegistration;
   }
 
-  public startDrive() {
-    this.gameService.postStartGame().subscribe(token => {
-      localStorage.setItem('token', token['token']);
-      setTimeout(() => {
-        this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
-          document.querySelector('#counted-speed').textContent = '' + parseInt(result['speed'] * 100 + '');
-          const modalBack = document.querySelector('.modal-backdrop');
-          const modal = document.querySelector('#start-drive-description');
-          modalBack.classList.add('show', 'd-block');
-          modalBack.classList.remove('d-none');
-          modal.classList.add('show', 'd-block');
-          modal.classList.remove('d-none');
-        });
-      }, 1);
-    });
-  }
-
   public startGame() {
     this.ongoingRegistration = true;
     localStorage.setItem('driveName', this.modalForm.controls.name.value);
@@ -89,7 +72,7 @@ export class StartpageComponent implements OnInit {
         },
         () => {
           this.ongoingRegistration = false;
-          alert('SOMETHING WRONG');
+          alert('Something went wrong. Contact responsible person.');
         }
       );
   }

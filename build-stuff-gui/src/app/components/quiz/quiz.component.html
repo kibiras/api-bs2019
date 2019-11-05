@@ -3,10 +3,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Congratulations</h4>
+        <h4 class="modal-title">Congratulations!</h4>
       </div>
       <div class="modal-body">
-        You are ready to start to focus in race.<br />Your speed will be <span id="counted-speed">{{ speed }}</span
+        Get ready to focus. Race is about to begin.<br />Your speed will be <span id="counted-speed">{{ speed }}</span
         >%.<br />Good luck!
       </div>
       <div class="modal-footer">
@@ -14,7 +14,7 @@
           <div class="spinner d-none" role="status">
             <span class="sr-only">Loading...</span>
           </div>
-          Start over <fa-icon [icon]="faFastBackward"></fa-icon>
+          Start a new game <fa-icon [icon]="faFastBackward"></fa-icon>
         </button>
       </div>
     </div>
@@ -25,7 +25,7 @@
   <h4>Player name: {{ driveName }}</h4>
 
   <aside class="question" *ngIf="!quizFinished">
-    <h5>Category: {{ (quizResult?.questions)[currentQuestion].category }}, difficulty: {{ (quizResult?.questions)[currentQuestion].difficulty }}</h5>
+    <h5>Category - {{ (quizResult?.questions)[currentQuestion].category }}, difficulty - {{ (quizResult?.questions)[currentQuestion].difficulty }}</h5>
 
     <div class="progress mt-3 mb-3">
       <div class="progress-bar progress-bar-striped {{ getProgressStyle() }}" role="progressbar"></div>
@@ -49,7 +49,7 @@
       <div class="progress-bar bg-success w-100" role="progressbar"></div>
     </div>
 
-    <h4>Results</h4>
+    <h4>Results:</h4>
 
     <table class="w-100">
       <thead>
@@ -73,7 +73,7 @@
       <div class="spinner d-none" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      Start drive <fa-icon [icon]="faPlay"></fa-icon>
+      Start driving <fa-icon [icon]="faPlay"></fa-icon>
     </button>
   </aside>
 </article>

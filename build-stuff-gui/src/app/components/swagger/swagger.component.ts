@@ -31,7 +31,7 @@ export class SwaggerComponent implements OnInit {
           modalFirst.classList.remove('show', 'd-block');
           modalFirst.classList.add('d-none');
 
-          document.querySelector('#counted-speed').textContent = result['max_speed'];
+          document.querySelector('#counted-speed').textContent = '' + parseInt(result['max_speed'] * 100 + '');
           const modalBack = document.querySelector('.modal-backdrop');
           const modal = document.querySelector('#start-drive-description');
           modalBack.classList.add('show', 'd-block');
