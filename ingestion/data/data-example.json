@@ -1,0 +1,30 @@
+[
+  {
+    "raceId": 0,
+    "attentionlevel_Player1": 0,
+    "attentionlevel_Player2": 0,
+    "Lap1Time_Player2": 0,
+    "Lap1Time_Player1": 0,
+    "eventName": "raceStart",
+    "lapNumber_Player1": 0,
+    "Lap3Time_Player2": 0,
+    "Lap3Time_Player1": 0,
+    "Lap2Time_Player2": 0,
+    "Lap2Time_Player1": 0,
+    "lapNumber_Player2": 0,
+    "meditation1level_Player1": 0,
+    "meditation2level_Player2": 0,
+    "maxSpeedSettings_Player2": 0,
+    "maxSpeedSettings_Player2": 0,
+    "CurrentLapTime_Player2": 0,
+    "CurrentLapTime_Player1": 0,
+    "whichPlayerCaused": 0,
+    "speed_Player1": 0,
+    "speed_Player2": 0,
+    "time": 1572803137,
+    "GForceY_Player2": 0,
+    "GForceY_Player1": 0,
+    "GForceX_Player1": 0,
+    "GForceX_Player2": 0
+  }
+]
