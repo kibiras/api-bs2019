@@ -4,14 +4,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Diagnostic problem found</h4>
+        <h4 class="modal-title">Problem found</h4>
       </div>
       <div class="modal-body">
         {{ diagnosticProblemDescription }}
       </div>
       <div class="modal-footer">
         <button (click)="closeModal()" type="submit" class="btn btn-primary w-100">
-          Ok, I understood
+          I understand
         </button>
       </div>
     </div>
@@ -22,10 +22,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Congratulations</h4>
+        <h4 class="modal-title">Congratulations!</h4>
       </div>
       <div class="modal-body">
-        You are ready to start to focus in race.<br />Your speed will be <span id="counted-speed">{{ speed }}</span
+        Get ready to focus. Race is about to begin.<br />Your speed will be <span id="counted-speed">{{ speed }}</span
         >%.<br />Good luck!
       </div>
       <div class="modal-footer">
@@ -33,7 +33,7 @@
           <div class="spinner d-none" role="status">
             <span class="sr-only">Loading...</span>
           </div>
-          Start over <fa-icon [icon]="faFastBackward"></fa-icon>
+          Start a new game <fa-icon [icon]="faFastBackward"></fa-icon>
         </button>
       </div>
     </div>
@@ -41,7 +41,7 @@
 </div>
 
 <article class="mt-3 overflow-hidden" id="diagnostics" *ngIf="token" [ngClass]="{ 'with-test-results': testDriveDone }">
-  <h3>Driver name: {{ driveName }}</h3>
+  <h3>Player name: {{ driveName }}</h3>
   <aside class="car-diagnostics">
     <h4><fa-icon [icon]="faCar"></fa-icon> Car diagnostics:</h4>
     <div>
@@ -177,7 +177,7 @@
           <fa-icon class="incorrect" *ngIf="roadDiagnosticsForm.controls['pithole'].value === 1" [icon]="faTimesCircle"> </fa-icon>
           <fa-icon class="correct" *ngIf="roadDiagnosticsForm.controls['pithole'].value === 0" [icon]="faCheckCircle"> </fa-icon>
           <fa-icon class="question" *ngIf="roadDiagnosticsForm.controls['pithole'].value === ''" [icon]="faQuestionCircle"> </fa-icon>
-          Pithole
+          Pothole
           <button id="fix-pithole" *ngIf="roadDiagnosticsForm.controls['pithole'].value === 1" type="button" (click)="fixRoadDiagnostic('pithole')" class="btn btn-outline-primary">
             <fa-icon [icon]="faTools"></fa-icon> Repair
             <div class="spinner" role="status">
@@ -203,10 +203,7 @@
   <aside class="test-results">
     <h4><fa-icon [icon]="faPollH"></fa-icon> Test drive results:</h4>
     <ul class="list-unstyled">
-      <li>
-        <fa-icon [icon]="faTachometerAlt"></fa-icon> Current status:
-        {{ testDriveResult }}
-      </li>
+      <li><fa-icon [icon]="faTachometerAlt"></fa-icon> Current status - {{ testDriveResult }}</li>
     </ul>
   </aside>
 </article>
@@ -217,13 +214,13 @@
       <div class="spinner d-none" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      Start over <fa-icon [icon]="faFastBackward"></fa-icon>
+      Start a new game <fa-icon [icon]="faFastBackward"></fa-icon>
     </button>
     <button id="start-button" type="button" class="btn btn-primary w-34" (click)="startDrive()">
       <div class="spinner d-none" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      Start drive <fa-icon [icon]="faPlay"></fa-icon>
+      Start driving <fa-icon [icon]="faPlay"></fa-icon>
     </button>
     <button id="test-button" type="button" class="btn btn-outline-primary w-33" (click)="testDrive()">
       <div class="spinner d-none" role="status">

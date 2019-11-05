@@ -85,28 +85,28 @@ export class ContentComponent implements OnInit {
         .subscribe(carDiagnostics => {
           switch (parameter) {
             case 'turbo_charger':
-              this.diagnosticProblemDescription = carDiagnostics[0].turbo_charger === 1 ? '' : 'Turbo chager should be changed. Otherwise car speed during race will be lower';
+              this.diagnosticProblemDescription = carDiagnostics[0].turbo_charger === 1 ? '' : 'Turbo charger should be changed. Otherwise the car speed during the race will be lower';
               if (carDiagnostics[0].turbo_charger === 0) {
                 this.openModal();
               }
               this.carDiagnosticsForm.controls.turbo_charger.setValue(carDiagnostics[0].turbo_charger);
               break;
             case 'tires':
-              this.diagnosticProblemDescription = carDiagnostics[0].tires === 1 ? '' : 'Tires should be inflated. Otherwise car speed during race will be lower';
+              this.diagnosticProblemDescription = carDiagnostics[0].tires === 1 ? '' : 'Tires should be inflated. Otherwise the car speed during the race will be lower';
               if (carDiagnostics[0].tires === 0) {
                 this.openModal();
               }
               this.carDiagnosticsForm.controls.tires.setValue(carDiagnostics[0].tires);
               break;
             case 'battery':
-              this.diagnosticProblemDescription = carDiagnostics[0].battery === 1 ? '' : 'Battery should be charged. Otherwise car speed during race will be lower';
+              this.diagnosticProblemDescription = carDiagnostics[0].battery === 1 ? '' : 'Battery should be charged. Otherwise the car speed during the race will be lower';
               if (carDiagnostics[0].battery === 0) {
                 this.openModal();
               }
               this.carDiagnosticsForm.controls.battery.setValue(carDiagnostics[0].battery);
               break;
             case 'fuel':
-              this.diagnosticProblemDescription = carDiagnostics[0].fuel === 1 ? '' : 'Fuel should be reffiled. Otherwise car speed during race will be lower';
+              this.diagnosticProblemDescription = carDiagnostics[0].fuel === 1 ? '' : 'Fuel should be refilled. Otherwise the car speed during the race will be lower';
               if (carDiagnostics[0].fuel === 0) {
                 this.openModal();
               }
@@ -131,14 +131,14 @@ export class ContentComponent implements OnInit {
         .subscribe(roadDiagnostics => {
           switch (parameter) {
             case 'barrier':
-              this.diagnosticProblemDescription = roadDiagnostics[0].barrier === 0 ? '' : 'Barrier should be removed. Otherwise car could hit it and car speed during race will be lower';
+              this.diagnosticProblemDescription = roadDiagnostics[0].barrier === 0 ? '' : 'Barrier should be removed. Otherwise the car could hit it and it could impact the speed';
               if (roadDiagnostics[0].barrier === 1) {
                 this.openModal();
               }
               this.roadDiagnosticsForm.controls.barrier.setValue(roadDiagnostics[0].barrier);
               break;
             case 'pithole':
-              this.diagnosticProblemDescription = roadDiagnostics[0].pithole === 0 ? '' : 'Pithole should be repaired. Otherwise car could dropped in it and car speed during race will be lower';
+              this.diagnosticProblemDescription = roadDiagnostics[0].pithole === 0 ? '' : 'Pothole should be repaired. Otherwise the car could be damaged';
               if (roadDiagnostics[0].pithole === 1) {
                 this.openModal();
               }
@@ -206,7 +206,7 @@ export class ContentComponent implements OnInit {
     localStorage.setItem('timerStart', 'false');
     setTimeout(() => {
       this.gameService.postStartDrive(this.token).subscribe(result => {
-        this.speed = result['max_speed'];
+        this.speed = result['max_speed'] * 100;
         const modalBack = document.querySelector('.modal-backdrop');
         const modal = document.querySelector('#start-drive-description');
         modalBack.classList.add('show', 'd-block');

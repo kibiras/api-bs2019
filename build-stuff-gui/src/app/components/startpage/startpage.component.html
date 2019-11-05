@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Enter your information to start a game</h4>
+        <h4 class="modal-title">Enter your information to start the game</h4>
       </div>
       <form [formGroup]="modalForm">
         <div class="modal-body">
@@ -12,17 +12,17 @@
             <input class="form-control" id="name" type="text" formControlName="name" placeholder="Nickname" />
           </div>
           <div class="form-group">
-            <label for="email">E-mail(Optional)</label>
-            <input class="form-control" id="email" type="text" formControlName="email" placeholder="E-mail(Optional)" />
+            <label for="email">E-mail (Optional)</label>
+            <input class="form-control" id="email" type="text" formControlName="email" placeholder="E-mail (Optional)" />
             <small id="emailHelp" class="form-text text-muted"
-              >Email will be used once - to send an invitation to pick up your price in case you will will. All collected data will be deleted at midnight. (to change)</small
+              >Email will be used once - to send an invitation to pick up your prize in case you will be one of the winners. All collected data will be deleted at midnight.</small
             >
           </div>
           <div class="form-group">
             <div class="custom-control custom-checkbox">
               <input class="custom-control-input" type="checkbox" formControlName="agreeToShowInLeaderBoard" id="agreeToShowInLeaderBoard" />
               <label class="custom-control-label" for="agreeToShowInLeaderBoard">
-                I agree that my result will be shown in leaderboard screen
+                I agree that my result would be shown in leaderboard screen
               </label>
             </div>
           </div>
@@ -49,15 +49,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Congratulations</h4>
+        <h4 class="modal-title">Congratulations!</h4>
       </div>
-      <div class="modal-body">You are ready to start to focus in race.<br />Your speed will be <span id="counted-speed">40</span>%.<br />Good luck!</div>
+      <div class="modal-body">Get ready to focus. Race is about to begin.<br />Your speed will be <span id="counted-speed">40</span>%.<br />Good luck!</div>
       <div class="modal-footer">
         <button id="again-button" type="button" class="btn btn-outline-danger w-100" (click)="startOver()">
           <div class="spinner d-none" role="status">
             <span class="sr-only">Loading...</span>
           </div>
-          Start over <fa-icon [icon]="faFastBackward"></fa-icon>
+          Start a new game <fa-icon [icon]="faFastBackward"></fa-icon>
         </button>
       </div>
     </div>
@@ -65,8 +65,8 @@
 </div>
 
 <article>
-  <button routerLink="swagger" (click)="startTimer('swagger')" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faSlidersH"></fa-icon> Swagger. (Max. 100% speed)</button>
-  <button routerLink="quiz" (click)="startTimer('quiz')" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faQuestion"></fa-icon> Quiz. (Max. 80% speed)</button>
-  <button (click)="startTimer('gui')" routerLink="gui-drive" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faEye"></fa-icon> GUI. (Max. 60% speed)</button>
-  <button (click)="startJustDrive()" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faFlagCheckered"></fa-icon> Just drive. (40% speed)</button>
+  <button routerLink="swagger" (click)="startTimer('swagger')" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faSlidersH"></fa-icon> Swagger (Max. 100% speed)</button>
+  <button routerLink="quiz" (click)="startTimer('quiz')" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faQuestion"></fa-icon> Quiz (Max. 80% speed)</button>
+  <button (click)="startTimer('gui')" routerLink="gui-drive" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faEye"></fa-icon> Service (Max. 60% speed)</button>
+  <button (click)="startJustDrive()" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faFlagCheckered"></fa-icon> Just drive (40% speed)</button>
 </article>

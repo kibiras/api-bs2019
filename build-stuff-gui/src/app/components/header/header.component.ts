@@ -31,8 +31,8 @@ export class HeaderComponent implements OnInit {
             document.querySelector('#start-button div').classList.remove('d-none');
             localStorage.setItem('timerStart', 'false');
             this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
-              document.querySelector('#counted-speed').textContent = result['max_speed'];
-              document.querySelector('#start-drive-description .modal-title').textContent = 'Your time is over';
+              document.querySelector('#counted-speed').textContent = '' + parseInt(result['max_speed'] * 100 + '');
+              document.querySelector('#start-drive-description .modal-title').textContent = 'Time is over';
               const modalBack = document.querySelector('.modal-backdrop');
               const modal = document.querySelector('#start-drive-description');
               modalBack.classList.add('show', 'd-block');
@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
               .postQuizResults(localStorage.getItem('token'), this.getQuizResult(0), this.getQuizResult(1), this.getQuizResult(2), this.getQuizResult(3), this.getQuizResult(4))
               .subscribe(result => {
                 document.querySelector('#counted-speed').textContent = `${result.speed[0] * 100}`;
-                document.querySelector('#start-drive-description .modal-title').textContent = 'Your time is over';
+                document.querySelector('#start-drive-description .modal-title').textContent = 'Time is over';
                 const modalBack = document.querySelector('.modal-backdrop');
                 const modal = document.querySelector('#start-drive-description');
                 modalBack.classList.add('show', 'd-block');
