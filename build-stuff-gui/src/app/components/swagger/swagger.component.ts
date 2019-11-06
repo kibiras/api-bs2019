@@ -26,19 +26,24 @@ export class SwaggerComponent implements OnInit {
     this.gameService.postStartGame().subscribe(token => {
       localStorage.setItem('token', token['token']);
       setTimeout(() => {
-        this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
-          const modalFirst = document.querySelector('#swagger-time-over');
-          modalFirst.classList.remove('show', 'd-block');
-          modalFirst.classList.add('d-none');
+        this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(
+          result => {
+            const modalFirst = document.querySelector('#swagger-time-over');
+            modalFirst.classList.remove('show', 'd-block');
+            modalFirst.classList.add('d-none');
 
-          document.querySelector('#counted-speed').textContent = '' + parseInt(result['max_speed'] * 100 + '');
-          const modalBack = document.querySelector('.modal-backdrop');
-          const modal = document.querySelector('#start-drive-description');
-          modalBack.classList.add('show', 'd-block');
-          modalBack.classList.remove('d-none');
-          modal.classList.add('show', 'd-block');
-          modal.classList.remove('d-none');
-        });
+            document.querySelector('#counted-speed').textContent = '' + parseInt(result['max_speed'] * 100 + '');
+            const modalBack = document.querySelector('.modal-backdrop');
+            const modal = document.querySelector('#start-drive-description');
+            modalBack.classList.add('show', 'd-block');
+            modalBack.classList.remove('d-none');
+            modal.classList.add('show', 'd-block');
+            modal.classList.remove('d-none');
+          },
+          () => {
+            alert('Something went wrong during starting a game. Contact responsible person.');
+          }
+        );
       }, 1);
     });
   }

@@ -35,16 +35,21 @@ export class QuizComponent implements OnInit {
 
     this.driveName = localStorage.getItem('driveName');
 
-    this.quizService.getQuestions().subscribe(questions => {
-      this.quizResult = questions;
-      this.token = questions.quiz[0].token;
-      localStorage.setItem('token', this.token);
-      let i = 0;
-      questions.questions.forEach(element => {
-        localStorage.setItem(`quiz-answer-${i}`, `${element.correct_answer === 'True' ? 'false' : 'true'}`);
-        i++;
-      });
-    });
+    this.quizService.getQuestions().subscribe(
+      questions => {
+        this.quizResult = questions;
+        this.token = questions.quiz[0].token;
+        localStorage.setItem('token', this.token);
+        let i = 0;
+        questions.questions.forEach(element => {
+          localStorage.setItem(`quiz-answer-${i}`, `${element.correct_answer === 'True' ? 'false' : 'true'}`);
+          i++;
+        });
+      },
+      () => {
+        alert('Something went wrong during getting questions. Contact responsible person.');
+      }
+    );
   }
 
   public getProgressStyle(): string {
@@ -82,16 +87,21 @@ export class QuizComponent implements OnInit {
     document.querySelector('#start-button div').classList.remove('d-none');
     localStorage.setItem('timerStart', 'false');
     setTimeout(() => {
-      this.quizService.postQuizResults(this.token, this.getStringAnswer(0), this.getStringAnswer(1), this.getStringAnswer(2), this.getStringAnswer(3), this.getStringAnswer(4)).subscribe(result => {
-        this.speed = parseInt(result.speed[0] * 100 + '');
-        const modalBack = document.querySelector('.modal-backdrop');
-        const modal = document.querySelector('#start-drive-description');
-        modalBack.classList.add('show', 'd-block');
-        modalBack.classList.remove('d-none');
-        modal.classList.add('show', 'd-block');
-        modal.classList.remove('d-none');
-        document.querySelector('#start-button div').classList.add('d-none');
-      });
+      this.quizService.postQuizResults(this.token, this.getStringAnswer(0), this.getStringAnswer(1), this.getStringAnswer(2), this.getStringAnswer(3), this.getStringAnswer(4)).subscribe(
+        result => {
+          this.speed = parseInt(result.speed[0] * 100 + '');
+          const modalBack = document.querySelector('.modal-backdrop');
+          const modal = document.querySelector('#start-drive-description');
+          modalBack.classList.add('show', 'd-block');
+          modalBack.classList.remove('d-none');
+          modal.classList.add('show', 'd-block');
+          modal.classList.remove('d-none');
+          document.querySelector('#start-button div').classList.add('d-none');
+        },
+        () => {
+          alert('Something went wrong during posting answers. Contact responsible person.');
+        }
+      );
     }, 1000);
   }
 }

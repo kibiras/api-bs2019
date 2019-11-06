@@ -29,15 +29,20 @@ export class StartpageComponent implements OnInit {
   faFastBackward = faFastBackward;
 
   public startJustDrive() {
-    this.gameService.startJustDrive().subscribe(token => {
-      localStorage.setItem('token', token['token']);
-      const modalBack = document.querySelector('.modal-backdrop');
-      const modal = document.querySelector('#start-drive-description');
-      modalBack.classList.add('show', 'd-block');
-      modalBack.classList.remove('d-none');
-      modal.classList.add('show', 'd-block');
-      modal.classList.remove('d-none');
-    });
+    this.gameService.startJustDrive().subscribe(
+      token => {
+        localStorage.setItem('token', token['token']);
+        const modalBack = document.querySelector('.modal-backdrop');
+        const modal = document.querySelector('#start-drive-description');
+        modalBack.classList.add('show', 'd-block');
+        modalBack.classList.remove('d-none');
+        modal.classList.add('show', 'd-block');
+        modal.classList.remove('d-none');
+      },
+      () => {
+        alert('Something went wrong during posting just a drive. Contact responsible person.');
+      }
+    );
   }
   ngOnInit() {
     localStorage.setItem('timerReStart', 'true');
@@ -72,7 +77,7 @@ export class StartpageComponent implements OnInit {
         },
         () => {
           this.ongoingRegistration = false;
-          alert('Something went wrong. Contact responsible person.');
+          alert('Something went wrong during registration. Contact responsible person.');
         }
       );
   }

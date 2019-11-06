@@ -51,10 +51,15 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameService.postStartGame().subscribe(token => {
-      localStorage.setItem('token', token['token']);
-      this.token = localStorage.getItem('token');
-    });
+    this.gameService.postStartGame().subscribe(
+      token => {
+        localStorage.setItem('token', token['token']);
+        this.token = localStorage.getItem('token');
+      },
+      () => {
+        alert('Something went wrong during starting a game. Contact responsible person.');
+      }
+    );
     this.driveName = localStorage.getItem('driveName');
   }
 
@@ -82,40 +87,45 @@ export class ContentComponent implements OnInit {
     setTimeout(() => {
       this.gameService
         .getDiagnostics(this.token)
-        .subscribe(carDiagnostics => {
-          switch (parameter) {
-            case 'turbo_charger':
-              this.diagnosticProblemDescription = carDiagnostics[0].turbo_charger === 1 ? '' : 'Turbo charger should be changed. Otherwise the car speed during the race will be lower';
-              if (carDiagnostics[0].turbo_charger === 0) {
-                this.openModal();
-              }
-              this.carDiagnosticsForm.controls.turbo_charger.setValue(carDiagnostics[0].turbo_charger);
-              break;
-            case 'tires':
-              this.diagnosticProblemDescription = carDiagnostics[0].tires === 1 ? '' : 'Tires should be inflated. Otherwise the car speed during the race will be lower';
-              if (carDiagnostics[0].tires === 0) {
-                this.openModal();
-              }
-              this.carDiagnosticsForm.controls.tires.setValue(carDiagnostics[0].tires);
-              break;
-            case 'battery':
-              this.diagnosticProblemDescription = carDiagnostics[0].battery === 1 ? '' : 'Battery should be charged. Otherwise the car speed during the race will be lower';
-              if (carDiagnostics[0].battery === 0) {
-                this.openModal();
-              }
-              this.carDiagnosticsForm.controls.battery.setValue(carDiagnostics[0].battery);
-              break;
-            case 'fuel':
-              this.diagnosticProblemDescription = carDiagnostics[0].fuel === 1 ? '' : 'Fuel should be refilled. Otherwise the car speed during the race will be lower';
-              if (carDiagnostics[0].fuel === 0) {
-                this.openModal();
-              }
-              this.carDiagnosticsForm.controls.fuel.setValue(carDiagnostics[0].fuel);
-              break;
-            default:
-              break;
+        .subscribe(
+          carDiagnostics => {
+            switch (parameter) {
+              case 'turbo_charger':
+                this.diagnosticProblemDescription = carDiagnostics[0].turbo_charger === 1 ? '' : 'Turbo charger should be changed. Otherwise the car speed during the race will be lower';
+                if (carDiagnostics[0].turbo_charger === 0) {
+                  this.openModal();
+                }
+                this.carDiagnosticsForm.controls.turbo_charger.setValue(carDiagnostics[0].turbo_charger);
+                break;
+              case 'tires':
+                this.diagnosticProblemDescription = carDiagnostics[0].tires === 1 ? '' : 'Tires should be inflated. Otherwise the car speed during the race will be lower';
+                if (carDiagnostics[0].tires === 0) {
+                  this.openModal();
+                }
+                this.carDiagnosticsForm.controls.tires.setValue(carDiagnostics[0].tires);
+                break;
+              case 'battery':
+                this.diagnosticProblemDescription = carDiagnostics[0].battery === 1 ? '' : 'Battery should be charged. Otherwise the car speed during the race will be lower';
+                if (carDiagnostics[0].battery === 0) {
+                  this.openModal();
+                }
+                this.carDiagnosticsForm.controls.battery.setValue(carDiagnostics[0].battery);
+                break;
+              case 'fuel':
+                this.diagnosticProblemDescription = carDiagnostics[0].fuel === 1 ? '' : 'Fuel should be refilled. Otherwise the car speed during the race will be lower';
+                if (carDiagnostics[0].fuel === 0) {
+                  this.openModal();
+                }
+                this.carDiagnosticsForm.controls.fuel.setValue(carDiagnostics[0].fuel);
+                break;
+              default:
+                break;
+            }
+          },
+          () => {
+            alert('Something went wrong during diagnosing a car. Contact responsible person.');
           }
-        })
+        )
         .add(() => {
           this.diagnosticInProgress = undefined;
         });
@@ -128,26 +138,31 @@ export class ContentComponent implements OnInit {
     setTimeout(() => {
       this.gameService
         .getDiagnostics(this.token)
-        .subscribe(roadDiagnostics => {
-          switch (parameter) {
-            case 'barrier':
-              this.diagnosticProblemDescription = roadDiagnostics[0].barrier === 0 ? '' : 'Barrier should be removed. Otherwise the car could hit it and it could impact the speed';
-              if (roadDiagnostics[0].barrier === 1) {
-                this.openModal();
-              }
-              this.roadDiagnosticsForm.controls.barrier.setValue(roadDiagnostics[0].barrier);
-              break;
-            case 'pithole':
-              this.diagnosticProblemDescription = roadDiagnostics[0].pithole === 0 ? '' : 'Pothole should be repaired. Otherwise the car could be damaged';
-              if (roadDiagnostics[0].pithole === 1) {
-                this.openModal();
-              }
-              this.roadDiagnosticsForm.controls.pithole.setValue(roadDiagnostics[0].pithole);
-              break;
-            default:
-              break;
+        .subscribe(
+          roadDiagnostics => {
+            switch (parameter) {
+              case 'barrier':
+                this.diagnosticProblemDescription = roadDiagnostics[0].barrier === 0 ? '' : 'Barrier should be removed. Otherwise the car could hit it and it could impact the speed';
+                if (roadDiagnostics[0].barrier === 1) {
+                  this.openModal();
+                }
+                this.roadDiagnosticsForm.controls.barrier.setValue(roadDiagnostics[0].barrier);
+                break;
+              case 'pithole':
+                this.diagnosticProblemDescription = roadDiagnostics[0].pithole === 0 ? '' : 'Pothole should be repaired. Otherwise the car could be damaged';
+                if (roadDiagnostics[0].pithole === 1) {
+                  this.openModal();
+                }
+                this.roadDiagnosticsForm.controls.pithole.setValue(roadDiagnostics[0].pithole);
+                break;
+              default:
+                break;
+            }
+          },
+          () => {
+            alert('Something went wrong during diagnosing a road. Contact responsible person.');
           }
-        })
+        )
         .add(() => {
           this.diagnosticInProgress = undefined;
         });
@@ -157,42 +172,52 @@ export class ContentComponent implements OnInit {
   public fixCarDiagnostic(problemName: string) {
     document.querySelector(`#fix-${problemName}`).classList.add('clicked');
     setTimeout(() => {
-      this.gameService.fixCarDiagnostic(this.token, problemName).subscribe(carDiagnostics => {
-        switch (problemName) {
-          case 'turbo_charger':
-            this.carDiagnosticsForm.controls.turbo_charger.setValue(1);
-            break;
-          case 'tires':
-            this.carDiagnosticsForm.controls.tires.setValue(1);
-            break;
-          case 'battery':
-            this.carDiagnosticsForm.controls.battery.setValue(1);
-            break;
-          case 'fuel':
-            this.carDiagnosticsForm.controls.fuel.setValue(1);
-            break;
-          default:
-            break;
+      this.gameService.fixCarDiagnostic(this.token, problemName).subscribe(
+        carDiagnostics => {
+          switch (problemName) {
+            case 'turbo_charger':
+              this.carDiagnosticsForm.controls.turbo_charger.setValue(1);
+              break;
+            case 'tires':
+              this.carDiagnosticsForm.controls.tires.setValue(1);
+              break;
+            case 'battery':
+              this.carDiagnosticsForm.controls.battery.setValue(1);
+              break;
+            case 'fuel':
+              this.carDiagnosticsForm.controls.fuel.setValue(1);
+              break;
+            default:
+              break;
+          }
+        },
+        () => {
+          alert('Something went wrong during fixing a car. Contact responsible person.');
         }
-      });
+      );
     }, 1000);
   }
 
   public fixRoadDiagnostic(problemName: string) {
     document.querySelector(`#fix-${problemName}`).classList.add('clicked');
     setTimeout(() => {
-      this.gameService.fixRoadDiagnostic(this.token, problemName).subscribe(roadDiagnostics => {
-        switch (problemName) {
-          case 'barrier':
-            this.roadDiagnosticsForm.controls.barrier.setValue(0);
-            break;
-          case 'pithole':
-            this.roadDiagnosticsForm.controls.pithole.setValue(0);
-            break;
-          default:
-            break;
+      this.gameService.fixRoadDiagnostic(this.token, problemName).subscribe(
+        roadDiagnostics => {
+          switch (problemName) {
+            case 'barrier':
+              this.roadDiagnosticsForm.controls.barrier.setValue(0);
+              break;
+            case 'pithole':
+              this.roadDiagnosticsForm.controls.pithole.setValue(0);
+              break;
+            default:
+              break;
+          }
+        },
+        () => {
+          alert('Something went wrong during fixing a road. Contact responsible person.');
         }
-      });
+      );
     }, 1000);
   }
 
@@ -205,27 +230,37 @@ export class ContentComponent implements OnInit {
     document.querySelector('#start-button div').classList.remove('d-none');
     localStorage.setItem('timerStart', 'false');
     setTimeout(() => {
-      this.gameService.postStartDrive(this.token).subscribe(result => {
-        this.speed = result['max_speed'] * 100;
-        const modalBack = document.querySelector('.modal-backdrop');
-        const modal = document.querySelector('#start-drive-description');
-        modalBack.classList.add('show', 'd-block');
-        modalBack.classList.remove('d-none');
-        modal.classList.add('show', 'd-block');
-        modal.classList.remove('d-none');
-        document.querySelector('#start-button div').classList.add('d-none');
-      });
+      this.gameService.postStartDrive(this.token).subscribe(
+        result => {
+          this.speed = result['max_speed'] * 100;
+          const modalBack = document.querySelector('.modal-backdrop');
+          const modal = document.querySelector('#start-drive-description');
+          modalBack.classList.add('show', 'd-block');
+          modalBack.classList.remove('d-none');
+          modal.classList.add('show', 'd-block');
+          modal.classList.remove('d-none');
+          document.querySelector('#start-button div').classList.add('d-none');
+        },
+        () => {
+          alert('Something went wrong during posting start driving. Contact responsible person.');
+        }
+      );
     }, 1000);
   }
 
   public testDrive() {
     document.querySelector('#test-button div').classList.remove('d-none');
     setTimeout(() => {
-      this.gameService.getTestDrive(this.token).subscribe(testResult => {
-        this.testDriveDone = true;
-        this.testDriveResult = testResult;
-        document.querySelector('#test-button div').classList.add('d-none');
-      });
+      this.gameService.getTestDrive(this.token).subscribe(
+        testResult => {
+          this.testDriveDone = true;
+          this.testDriveResult = testResult;
+          document.querySelector('#test-button div').classList.add('d-none');
+        },
+        () => {
+          alert('Something went wrong during test drive. Contact responsible person.');
+        }
+      );
     }, 1000);
   }
 }

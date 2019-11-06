@@ -30,24 +30,9 @@ export class HeaderComponent implements OnInit {
           case 'gui':
             document.querySelector('#start-button div').classList.remove('d-none');
             localStorage.setItem('timerStart', 'false');
-            this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(result => {
-              document.querySelector('#counted-speed').textContent = '' + parseInt(result['max_speed'] * 100 + '');
-              document.querySelector('#start-drive-description .modal-title').textContent = 'Time is over';
-              const modalBack = document.querySelector('.modal-backdrop');
-              const modal = document.querySelector('#start-drive-description');
-              modalBack.classList.add('show', 'd-block');
-              modalBack.classList.remove('d-none');
-              modal.classList.add('show', 'd-block');
-              modal.classList.remove('d-none');
-              document.querySelector('#start-button div').classList.add('d-none');
-            });
-            break;
-          case 'quiz':
-            localStorage.setItem('timerStart', 'false');
-            this.quizService
-              .postQuizResults(localStorage.getItem('token'), this.getQuizResult(0), this.getQuizResult(1), this.getQuizResult(2), this.getQuizResult(3), this.getQuizResult(4))
-              .subscribe(result => {
-                document.querySelector('#counted-speed').textContent = `${result.speed[0] * 100}`;
+            this.gameService.postStartDrive(localStorage.getItem('token')).subscribe(
+              result => {
+                document.querySelector('#counted-speed').textContent = '' + parseInt(result['max_speed'] * 100 + '');
                 document.querySelector('#start-drive-description .modal-title').textContent = 'Time is over';
                 const modalBack = document.querySelector('.modal-backdrop');
                 const modal = document.querySelector('#start-drive-description');
@@ -55,7 +40,32 @@ export class HeaderComponent implements OnInit {
                 modalBack.classList.remove('d-none');
                 modal.classList.add('show', 'd-block');
                 modal.classList.remove('d-none');
-              });
+                document.querySelector('#start-button div').classList.add('d-none');
+              },
+              () => {
+                alert('Something went wrong during posting start driving. Contact responsible person.');
+              }
+            );
+            break;
+          case 'quiz':
+            localStorage.setItem('timerStart', 'false');
+            this.quizService
+              .postQuizResults(localStorage.getItem('token'), this.getQuizResult(0), this.getQuizResult(1), this.getQuizResult(2), this.getQuizResult(3), this.getQuizResult(4))
+              .subscribe(
+                result => {
+                  document.querySelector('#counted-speed').textContent = `${result.speed[0] * 100}`;
+                  document.querySelector('#start-drive-description .modal-title').textContent = 'Time is over';
+                  const modalBack = document.querySelector('.modal-backdrop');
+                  const modal = document.querySelector('#start-drive-description');
+                  modalBack.classList.add('show', 'd-block');
+                  modalBack.classList.remove('d-none');
+                  modal.classList.add('show', 'd-block');
+                  modal.classList.remove('d-none');
+                },
+                () => {
+                  alert('Something went wrong during posting answers. Contact responsible person.');
+                }
+              );
             break;
           case 'swagger':
             localStorage.setItem('timerStart', 'false');
