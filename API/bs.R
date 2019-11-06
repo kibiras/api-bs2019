@@ -59,7 +59,7 @@ function(token = ""){
     game_info <- dbGetQuery(con, paste0("select * from game_info where token = '", token, "'"))
     problems <- (4 - sum(game_info[4:7]) + sum(game_info[8:9]))
     if (problems == 0) {
-      text <- "Ready to reach max speed!"
+      text <- "Ready to reach the max speed!"
     }
     else {
       text <- paste0("Problems left: ", problems)

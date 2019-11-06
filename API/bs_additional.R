@@ -11,6 +11,7 @@ library(magrittr)
 library(jsonlite)
 library(stringi)
 library(httr)
+library(pingr)
 
 source("config.R")
 
@@ -118,9 +119,18 @@ function(nickname = "", email = "", agreedLeaderBoard = "", agreedInformation = 
   leaderboard <- agreedLeaderBoard
   communication <- agreedInformation
   # game_id <- dbGetQuery(con, "select max(race_id) as game_id from event;")$game_id
-  get_id <- GET(car_api, content_type_json(), encode = "json") %>%
-    content()
-  game_id <- get_id$content
+  # get_id <- GET(car_api, content_type_json(), encode = "json", timeout(2)) %>%
+  #   content()
+  # game_id <- get_id$content
+  
+  if (is.na(ping(car_api, count = 1))) {
+    game_id <- dbGetQuery(con, "select max(race_id) as game_id from event;")$game_id
+  }
+    else {
+      get_id <- GET(car_api, content_type_json(), encode = "json", timeout(2)) %>%
+        content()
+      game_id <- get_id$content
+    }
   date <- as.character(Sys.time())
   ip <- req$REMOTE_ADDR
   api_pc_id <- as.integer(stri_sub(ip, -1)) %% 2
