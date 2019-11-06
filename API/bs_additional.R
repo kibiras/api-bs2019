@@ -117,11 +117,14 @@ function(nickname = "", email = "", agreedLeaderBoard = "", agreedInformation = 
   email <- email
   leaderboard <- agreedLeaderBoard
   communication <- agreedInformation
-  pc_id <- 1
-  game_id <- 1
+  # game_id <- dbGetQuery(con, "select max(race_id) as game_id from event;")$game_id
+  get_id <- GET(car_api, content_type_json(), encode = "json") %>%
+    content()
+  game_id <- get_id$content
   date <- as.character(Sys.time())
   ip <- req$REMOTE_ADDR
   api_pc_id <- as.integer(stri_sub(ip, -1)) %% 2
+  pc_id <- api_pc_id
   df <- cbind.data.frame(username, email, leaderboard, communication, pc_id, game_id, api_pc_id, ip, date) 
   dbWriteTable(con, "users", df, append = TRUE)
   list(Message = "Success")
