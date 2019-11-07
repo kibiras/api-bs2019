@@ -65,8 +65,16 @@
 </div>
 
 <article>
-  <button routerLink="swagger" (click)="startTimer('swagger')" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faSlidersH"></fa-icon> Swagger (Max. 100% speed)</button>
-  <button routerLink="quiz" (click)="startTimer('quiz')" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faQuestion"></fa-icon> Quiz (Max. 80% speed)</button>
-  <button (click)="startTimer('gui')" routerLink="gui-drive" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faEye"></fa-icon> Service (Max. 60% speed)</button>
-  <button (click)="startJustDrive()" type="button" class="btn btn-lg btn-outline-primary"><fa-icon [icon]="faFlagCheckered"></fa-icon> Just drive (40% speed)</button>
+  <button routerLink="swagger" (click)="startTimer('swagger')" type="button" class="btn btn-lg btn-outline-primary">
+    <fa-icon [icon]="faSlidersH"></fa-icon> <strong>Swagger</strong><br />Identify back-end problems and solve them.<br />You need to know REST API. Max 100% speed.
+  </button>
+  <button routerLink="quiz" (click)="startTimer('quiz')" type="button" class="btn btn-lg btn-outline-primary">
+    <fa-icon [icon]="faQuestion"></fa-icon> <strong>Quiz</strong><br />Short 5-question quiz (computer science, maths & gaming).<br />Max 80% speed.
+  </button>
+  <button (click)="startTimer('gui')" routerLink="gui-drive" type="button" class="btn btn-lg btn-outline-primary">
+    <fa-icon [icon]="faEye"></fa-icon> <strong>Car service</strong><br />Easy: click for car inspection and repair.<br />Max 60% speed.
+  </button>
+  <button (click)="startJustDrive()" type="button" class="btn btn-lg btn-outline-primary">
+    <fa-icon [icon]="faFlagCheckered"></fa-icon> <strong>Just drive</strong><br />No tasks, just drive. Max 40% speed.
+  </button>
 </article>
