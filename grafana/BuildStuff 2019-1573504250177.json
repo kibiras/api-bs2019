@@ -1,0 +1,1285 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fill": 3,
+      "fillGradient": 5,
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "speed",
+          "fill": 10,
+          "linewidth": 7,
+          "yaxis": 2
+        },
+        {
+          "alias": "attention",
+          "color": "#5794F2",
+          "fill": 10
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "1s",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__unixEpochGroupAlias(time,1s),\n  avg(attentionlevel_player1) AS \"attention\",\n  avg(speed_player1) AS \"speed\"\nFROM event\nWHERE\n  $__unixEpochFilter(time)\nGROUP BY 1\nORDER BY $__unixEpochGroup(time,1s)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "attentionlevel_player1"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "attention"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "speed_player1"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "speed"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "event",
+          "timeColumn": "time",
+          "timeColumnType": "double",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 40,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Player 1",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": "120",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "velocitykmh",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "hideTimeOverride": false,
+      "id": 26,
+      "interval": "3s",
+      "options": {},
+      "pconfig": {
+        "fixScale": "",
+        "layout": {
+          "dragmode": "select",
+          "font": {
+            "family": "\"Open Sans\", Helvetica, Arial, sans-serif"
+          },
+          "hovermode": "closest",
+          "legend": {
+            "orientation": "v"
+          },
+          "showlegend": false,
+          "xaxis": {
+            "range": [
+              -2,
+              2
+            ],
+            "rangemode": "between",
+            "showgrid": true,
+            "title": "",
+            "type": "",
+            "zeroline": true
+          },
+          "yaxis": {
+            "range": [
+              -2,
+              2
+            ],
+            "rangemode": "between",
+            "showgrid": true,
+            "title": "",
+            "type": "",
+            "zeroline": true
+          },
+          "zaxis": {
+            "rangemode": "normal",
+            "showgrid": true,
+            "type": "linear",
+            "zeroline": false
+          }
+        },
+        "loadFromCDN": false,
+        "settings": {
+          "displayModeBar": false,
+          "type": "scatter"
+        },
+        "showAnnotations": false,
+        "traces": [
+          {
+            "mapping": {
+              "color": "A@row",
+              "size": null,
+              "text": null,
+              "x": "gforcex_player1",
+              "y": "gforcey_player1",
+              "z": null
+            },
+            "name": "G Force",
+            "settings": {
+              "color_option": "ramp",
+              "line": {
+                "color": "#005f81",
+                "dash": "dash",
+                "shape": "linear",
+                "width": 5
+              },
+              "marker": {
+                "color": "#33B5E5",
+                "colorscale": "YlOrRd",
+                "line": {
+                  "color": "#DDD",
+                  "width": 0
+                },
+                "showscale": false,
+                "size": 70,
+                "sizemin": 3,
+                "sizemode": "diameter",
+                "sizeref": 0.2,
+                "symbol": "circle"
+              }
+            },
+            "show": {
+              "line": true,
+              "lines": false,
+              "markers": true
+            }
+          }
+        ]
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "1s",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__unixEpochGroupAlias(time,1s),\n  avg(gforcex_player1) AS \"gforcex_player1\",\n  avg(gforcey_player1) AS \"gforcey_player1\"\nFROM event\nWHERE\n  $__unixEpochFilter(time)\nGROUP BY 1\nORDER BY $__unixEpochGroup(time,1s)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "gforcex_player1"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "gforcex_player1"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "gforcey_player1"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "gforcey_player1"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "event",
+          "timeColumn": "time",
+          "timeColumnType": "double",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": "3s",
+      "timeShift": null,
+      "title": "G Force meter (m/s^2)",
+      "transparent": true,
+      "type": "natel-plotly-panel",
+      "version": 1
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#73BF69",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 19,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select max(race_id) from event;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "attentionlevel_player1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "event",
+          "timeColumn": "time",
+          "timeColumnType": "double",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Current game",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "max"
+    },
+    {
+      "columns": [],
+      "datasource": "MySQL",
+      "description": "",
+      "fontSize": "130%",
+      "gridPos": {
+        "h": 15,
+        "w": 8,
+        "x": 16,
+        "y": 4
+      },
+      "id": 17,
+      "options": {},
+      "pageSize": 10,
+      "showHeader": true,
+      "sort": {
+        "col": 4,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 3,
+          "mappingType": 1,
+          "pattern": "total_time",
+          "thresholds": [
+            "90"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "best_time",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": "value",
+          "colors": [
+            "#FADE2A",
+            "#73BF69",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "car_id",
+          "thresholds": [
+            "1"
+          ],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "id",
+          "rawQuery": true,
+          "rawSql": "select \nmax(users.id) as reg_id,\nrace_id, \napi_pc_id as car_id, \nusername, \nwhole_race_time_player2/1000 as total_time,\ndate\nfrom users\nINNER JOIN users_results ON  users.game_id = users_results.race_id AND users.api_pc_id = users_results.which_player_caused\nWHERE users_results.event_name = 'raceFinished' AND api_pc_id = 1\nGROUP BY api_pc_id, race_id\n\nUNION ALL\n\nselect\nmax(users.id) as reg_id,\nrace_id, \napi_pc_id as car_id, \nusername, \nwhole_race_time_player1/1000 as total_time,\ndate\nfrom users\nINNER JOIN users_results ON  users.game_id = users_results.race_id AND users.api_pc_id = users_results.which_player_caused\nWHERE users_results.event_name = 'raceFinished' AND api_pc_id = 0 \nGROUP BY api_pc_id, race_id\nORDER BY total_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "username"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "email"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "users",
+          "timeColumn": "date",
+          "timeColumnType": "varchar",
+          "where": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Leaderboard",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 12,
+        "y": 7
+      },
+      "id": 28,
+      "interval": "1s",
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.4.3",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "1s",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__unixEpochGroupAlias(time,1s),\n  avg(speed_player1) AS \"speed\"\nFROM event\nWHERE\n  $__unixEpochFilter(time)\nGROUP BY 1\nORDER BY $__unixEpochGroup(time,1s)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "speed_player1"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "speed"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "event",
+          "timeColumn": "time",
+          "timeColumnType": "double",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": "3s",
+      "timeShift": null,
+      "title": "Speed",
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 3,
+      "fillGradient": 5,
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "id": 9,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "speed",
+          "color": "#37872D",
+          "linewidth": 7,
+          "yaxis": 2
+        },
+        {
+          "alias": "attention",
+          "color": "#5794F2"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "1s",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__unixEpochGroupAlias(time,1s),\n  avg(attentionlevel_player2) AS \"attention\",\n  avg(speed_player2) AS \"speed\"\nFROM event\nWHERE\n  $__unixEpochFilter(time)\nGROUP BY 1\nORDER BY $__unixEpochGroup(time,1s)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "attentionlevel_player2"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "attention"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "speed_player2"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "speed"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "event",
+          "timeColumn": "time",
+          "timeColumnType": "double",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 40,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Player 2",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "120",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "velocitykmh",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 12,
+        "y": 13
+      },
+      "hideTimeOverride": false,
+      "id": 27,
+      "interval": "3s",
+      "options": {},
+      "pconfig": {
+        "fixScale": "",
+        "layout": {
+          "dragmode": "select",
+          "font": {
+            "family": "\"Open Sans\", Helvetica, Arial, sans-serif"
+          },
+          "hovermode": "closest",
+          "legend": {
+            "orientation": "v"
+          },
+          "showlegend": false,
+          "xaxis": {
+            "range": [
+              -2,
+              2
+            ],
+            "rangemode": "between",
+            "showgrid": true,
+            "title": "",
+            "type": "",
+            "zeroline": true
+          },
+          "yaxis": {
+            "range": [
+              -2,
+              2
+            ],
+            "rangemode": "between",
+            "showgrid": true,
+            "title": "",
+            "type": "",
+            "zeroline": true
+          },
+          "zaxis": {
+            "rangemode": "normal",
+            "showgrid": true,
+            "type": "linear",
+            "zeroline": false
+          }
+        },
+        "loadFromCDN": false,
+        "settings": {
+          "displayModeBar": false,
+          "type": "scatter"
+        },
+        "showAnnotations": false,
+        "traces": [
+          {
+            "mapping": {
+              "color": "time",
+              "size": null,
+              "text": null,
+              "x": "gforcex_player1",
+              "y": "gforcey_player1",
+              "z": null
+            },
+            "name": "G Force",
+            "settings": {
+              "color_option": "ramp",
+              "line": {
+                "color": "#005f81",
+                "dash": "dash",
+                "shape": "linear",
+                "width": 5
+              },
+              "marker": {
+                "color": "#33B5E5",
+                "colorscale": "Greens",
+                "line": {
+                  "color": "#DDD",
+                  "width": 0
+                },
+                "showscale": false,
+                "size": 70,
+                "sizemin": 3,
+                "sizemode": "diameter",
+                "sizeref": 0.2,
+                "symbol": "circle"
+              }
+            },
+            "show": {
+              "line": true,
+              "lines": false,
+              "markers": true
+            }
+          }
+        ]
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "1s",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__unixEpochGroupAlias(time,1s),\n  avg(gforcex_player2) AS \"gforcex_player1\",\n  avg(gforcey_player2) AS \"gforcey_player1\"\nFROM event\nWHERE\n  $__unixEpochFilter(time)\nGROUP BY 1\nORDER BY $__unixEpochGroup(time,1s)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "gforcex_player2"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "gforcex_player1"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "gforcey_player2"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "gforcey_player1"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "event",
+          "timeColumn": "time",
+          "timeColumnType": "double",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": "3s",
+      "timeShift": null,
+      "title": "G Force meter (m/s^2)",
+      "transparent": true,
+      "type": "natel-plotly-panel",
+      "version": 1
+    },
+    {
+      "content": "<img src=/public/img/bs.gif>",
+      "datasource": null,
+      "gridPos": {
+        "h": 14,
+        "w": 8,
+        "x": 16,
+        "y": 19
+      },
+      "id": 4,
+      "mode": "html",
+      "options": {},
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 12,
+        "y": 20
+      },
+      "id": 24,
+      "interval": "1s",
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.4.3",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "1s",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__unixEpochGroupAlias(time,1s),\n  avg(speed_player2) AS \"speed\"\nFROM event\nWHERE\n  $__unixEpochFilter(time)\nGROUP BY 1\nORDER BY $__unixEpochGroup(time,1s)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "speed_player2"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "speed"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "event",
+          "timeColumn": "time",
+          "timeColumnType": "double",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": "3s",
+      "timeShift": null,
+      "title": "Speed",
+      "type": "gauge"
+    },
+    {
+      "content": "<img src=/public/img/flow.png>",
+      "datasource": null,
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 0,
+        "y": 26
+      },
+      "id": 29,
+      "mode": "html",
+      "options": {},
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "columns": [],
+      "datasource": "MySQL",
+      "description": "",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 17,
+        "y": 33
+      },
+      "id": 2,
+      "options": {},
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 0,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "id",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  game_id,\n  max(id) as id,\n  username,\n  email,\n  api_pc_id as car_id,\n  date\nFROM users\nWHERE leaderboard <> 'false'\nGROUP BY username, email\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "username"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "email"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "users",
+          "timeColumn": "date",
+          "timeColumnType": "varchar",
+          "where": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Leaderboard debug",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 20,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2019-11-11T14:09:15.099Z",
+    "to": "2019-11-11T14:09:49.185Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1s",
+      "2s",
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "BuildStuff 2019",
+  "uid": "rzkOMg1Zk",
+  "version": 77
+}
