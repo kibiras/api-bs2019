@@ -1,0 +1,6 @@
+"","raceid","time","eventname","whichplayercaused","wholeracetime_player1","wholeracetime_player2","lapnumber_player1","lapnumber_player2","speed_player1","speed_player2","gforcey_player1","gforcex_player1"
+"1",106,1573142352,"gameStart",0,0,0,0,0,0,0,1,1
+"2",106,1573142364,"raceStart",0,0,0,0,0,144,0,1,1
+"3",106,1573142366,"raceFinished",0,1971,1971,3,0,144,0,1,1
+"4",106,1573142367,"raceStart",1,1971,1971,3,0,144,0,1,1
+"5",106,1573142369,"raceFinished",1,1971,1971,3,3,144,0,1,1
