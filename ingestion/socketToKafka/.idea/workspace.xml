@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="490a9ccf-0a95-4700-9e56-3e7cf6577cc5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../consumPersist/src/main/java/se/seb/buildstuff/Domain/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/../consumPersist/src/main/java/se/seb/buildstuff/Domain/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../consumPersist/src/main/java/se/seb/buildstuff/KafkaReceiver/KafkaReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../consumPersist/src/main/java/se/seb/buildstuff/KafkaReceiver/KafkaReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billiardstream.iml" beforeDir="false" afterPath="$PROJECT_DIR$/billiardstream.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/FromSocketToKafka.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/FromSocketToKafka.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/billiardstream-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/billiardstream-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/billiardstream-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/billiardstream-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FromSocketToKafka$$anonfun$main$1$$anonfun$apply$1$$anonfun$apply$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FromSocketToKafka$$anonfun$main$1$$anonfun$apply$1$$anonfun$apply$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FromSocketToKafka$$anonfun$main$1$$anonfun$apply$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FromSocketToKafka$$anonfun$main$1$$anonfun$apply$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FromSocketToKafka$$anonfun$main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FromSocketToKafka$$anonfun$main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FromSocketToKafka$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FromSocketToKafka$.class" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1TEYTTTZmD6ufjkwxbc11sKrw5a" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="490a9ccf-0a95-4700-9e56-3e7cf6577cc5" name="Default Changelist" comment="" />
+      <created>1573026729920</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573026729920</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

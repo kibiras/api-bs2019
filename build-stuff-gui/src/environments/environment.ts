@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  host: '192.168.43.195'
+  //host: '192.168.43.195'
+  //host: '192.168.43.142'
+  host: '192.168.10.103'
+  //host: '172.20.10.10'
 };
 
 /*

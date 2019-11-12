@@ -25,9 +25,10 @@ public class Event {
     @JsonProperty("Lap1Time_Player1")
     private Double Lap1Time_Player1;
     private String eventName;
-    private Double lapNumber_Player1;
+
     @JsonProperty("Lap3Time_Player2")
     private Double Lap3Time_Player2;
+
 
     @JsonProperty("Lap3Time_Player1")
     private Double Lap3Time_Player1;
@@ -38,16 +39,28 @@ public class Event {
     @JsonProperty("Lap2Time_Player1")
     private Double Lap2Time_Player1;
 
+    @JsonProperty("WholeRaceTime_Player2")
+    private Double WholeRaceTime_Player2;
+
+    @JsonProperty("WholeRaceTime_Player1")
+    private Double WholeRaceTime_Player1;
+
+    private Double lapNumber_Player1;
     private Double lapNumber_Player2;
+
     private Double meditation1level_Player1;
     private Double meditation2level_Player2;
+
     private Double maxSpeedSettings_Player1;
     private Double maxSpeedSettings_Player2;
 
-    @JsonProperty("CurrentLapTime_Player2")
-    private Double CurrentLapTime_Player2;
+
+
     @JsonProperty("CurrentLapTime_Player1")
     private Double CurrentLapTime_Player1;
+
+    @JsonProperty("CurrentLapTime_Player2")
+    private Double CurrentLapTime_Player2;
     private Double whichPlayerCaused;
     private Double speed_Player1;
     private Double speed_Player2;
@@ -60,7 +73,6 @@ public class Event {
     private Double GForceX_Player1;
     @JsonProperty("GForceX_Player2")
     private Double GForceX_Player2;
-    private String name;
     public Event() {
     }
 }

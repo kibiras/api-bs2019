@@ -19,13 +19,14 @@ object FromSocketToKafka extends Serializable {
     val topicName = args(0)
     val host = args(1)
     val port = args(2).toInt
+    val sec = args(3).toInt
 
 
 
     val conf: SparkConf = new SparkConf().setAppName("Biliardas").setMaster("local[4]")
     val sc = new SparkContext(conf)
 
-    val ssc = new StreamingContext(sc, Seconds(2))
+    val ssc = new StreamingContext(sc, Seconds(sec))
 
     val lines = ssc.socketTextStream(host, port)
 

@@ -1,3 +1,7 @@
+select
+@rownum := @rownum + 1 AS rank,
+username, total_time, race_id, car_id
+from (
 select 
 max(users.id) as reg_id,
 race_id, 
@@ -9,9 +13,7 @@ from users
 INNER JOIN users_results ON  users.game_id = users_results.race_id AND users.api_pc_id = users_results.which_player_caused
 WHERE users_results.event_name = 'raceFinished' AND api_pc_id = 1
 GROUP BY api_pc_id, race_id
-
 UNION ALL
-
 select
 max(users.id) as reg_id,
 race_id, 
@@ -24,3 +26,5 @@ INNER JOIN users_results ON  users.game_id = users_results.race_id AND users.api
 WHERE users_results.event_name = 'raceFinished' AND api_pc_id = 0 
 GROUP BY api_pc_id, race_id
 ORDER BY total_time
+) T,
+(SELECT @rownum := 0) r
