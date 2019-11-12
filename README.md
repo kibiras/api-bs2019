@@ -53,3 +53,29 @@ npm start
 * UI - Visual Studio
 * MariaDB - DBeaver
 
+
+### Kafka
+
+this year we used Kafka from Confluent on Docker : https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html
+
+* Start Kafka cluster :
+```
+docker-compose up -d --build
+```
+
+### Docker
+
+Docker is added unders systemctl and should start automatically after each reboot.
+
+* Check Docker
+```
+systemctl status docker
+```
+
+### Mariadbb
+
+* MariaDB is added unders systemctl and should start automatically after each reboot.
+
+```
+systemctl status mariadb
+```
